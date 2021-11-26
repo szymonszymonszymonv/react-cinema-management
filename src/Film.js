@@ -6,7 +6,7 @@ function Film(props) {
     const params = useParams()
     let navigate = useNavigate()
     const idx = params.id
-    const { films, setFilms } = props;
+    const {films, setFilms } = props;
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState(" ");
     const [duration, setDuration] = useState(" ");
@@ -45,7 +45,6 @@ function Film(props) {
         copy[0].duration = duration;
         setDuration(copy);
         setFilms(copy)
-
     };
 
     const buttonClickDescription = () => {

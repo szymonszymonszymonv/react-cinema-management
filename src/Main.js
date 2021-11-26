@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Routes, Link } from 'react-router-dom'
 import Screening from './Screening';
 import Film from './Film'
+import AddFilm from './AddFilm';
 
 class Main extends Component {
     constructor(props) {
@@ -10,19 +11,27 @@ class Main extends Component {
             movies: [
                 {
                     title: "kurier francuski",
-                    duration: "91m"
+                    duration: "91m",
+                    description: "fsfggg",
+                    cast: "Kuba"
                 },
                 {
                     title: "james bond",
-                    duration: "130m"
+                    duration: "130m",
+                    description: "kfjkdfjagnjdg",
+                    cast: "Kuba"
                 },
                 {
                     title: "diuna",
-                    duration: "160m"
+                    duration: "160m",
+                    description: "llkll",
+                    cast: "Daria"
                 },
                 {
                     title: "licorice pizza",
-                    duration: "130m"
+                    duration: "130m",
+                    description: "mmmmmm",
+                    cast: "Czarek"
                 }
             ],
             screenings: []
@@ -101,6 +110,7 @@ class Main extends Component {
     }
 
     render() { 
+        
         let screenings = this.state.screenings
         let movies = this.state.movies
         return ( 
@@ -108,10 +118,12 @@ class Main extends Component {
                 <p>SEANSE:</p>
                 {this.displayScreenings()}
                 <p>FILMY:</p>
+                <Link to={`/film/add`}>  Add Film :) </Link>
                 {this.displayFilms()}
                 <Routes>
                     <Route path='/seans/:id' element={<Screening screenings={screenings} setScreenings={this.setScreenings}/>}/>
                     <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
+                    <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                 </Routes>
             </div>
             );

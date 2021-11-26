@@ -5,6 +5,7 @@ function DeleteFilm (props){
     const {idx, listaFilmow, deleteFilm} = props
     const film = listaFilmow[idx]
     const [listaFilmoww, setListaFilmow] = useState(listaFilmow)
+    
     const buttonClickDelete = () => {  
         var filtered = listaFilmoww.filter((item) => item !== film)
         setListaFilmow( () => filtered)
