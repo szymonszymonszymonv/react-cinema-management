@@ -23,7 +23,9 @@ function EditScreening(props) {
         let copy = [...screeningList]
 
         copy[idx].film.title = title
-        copy[idx].date = new Date(date)
+        let dateInts = date.split("-").map((x) => {return parseInt(x)})
+        dateInts[1] -= 1
+        copy[idx].date = new Date(...dateInts)
         copy[idx].time = time
         copy[idx].room = room
         copy[idx].soldTickets = soldTickets

@@ -19,7 +19,7 @@ function Screening(props) {
         return (
             <div>
                 <p>{`tytuł: ${screening.film.title}`}</p>    
-                <p>{`data: ${screening.date.getFullYear()}.${screening.date.getMonth()}.${screening.date.getDate()}`} </p>   
+                <p>{`data: ${screening.date.getFullYear()}.${screening.date.getMonth() + 1}.${screening.date.getDate()}`} </p>   
                 <p>{`godzina: ${screening.time}`}</p>    
                 <p>{`sala: ${screening.room}`}</p>    
                 <p>{`sprzedane bilety: ${screening.soldTickets}`}</p>    

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Routes, Link } from 'react-router-dom'
 import Screening from './Screening';
+import Film from './Film'
 
 class Main extends Component {
     constructor(props) {
@@ -63,19 +64,22 @@ class Main extends Component {
     }
 
     setScreenings = (screenings) => {
-        this.setState({screenings: screenings})
+        this.setState( () => {return {screenings: screenings}})
+    }
+
+    setFilms = (films) => {
+        this.setState({movies: films}, () => {console.log(this.state.movies)})
     }
 
     displayScreenings = () => {
         let screeningsView = this.state.screenings.map((item, idx) => {
             return (
                 <div key={idx}>
-                    <Link to={`/film${idx}`}>{item.film.title}</Link> <span>({item.film.duration}) </span>
+                    <Link to={`/film/${idx}`}>{item.film.title}</Link> <span>({item.film.duration}) </span>
                     <Link to={`seans/${idx}`}>
                         {item.time}
                     </Link>
                     
-                    {/* <Screening screening={item} id={idx} /> */}
                 </div>
             )
         })
@@ -107,7 +111,7 @@ class Main extends Component {
                 {this.displayFilms()}
                 <Routes>
                     <Route path='/seans/:id' element={<Screening screenings={screenings} setScreenings={this.setScreenings}/>}/>
-                    <Route path='/film/:id' element={" "}/>
+                    <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
                 </Routes>
             </div>
             );

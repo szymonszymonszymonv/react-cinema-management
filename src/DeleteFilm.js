@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 
 
 function DeleteFilm (props){
-    const {film, listaFilmow, deleteFilm} = props
-
+    const {idx, listaFilmow, deleteFilm} = props
+    const film = listaFilmow[idx]
     const [listaFilmoww, setListaFilmow] = useState(listaFilmow)
     const buttonClickDelete = () => {  
         var filtered = listaFilmoww.filter((item) => item !== film)
-        setListaFilmow(filtered)
-        deleteFilm(listaFilmoww)
+        setListaFilmow( () => filtered)
+        console.log(`lista filmow w DeleteFilm: ${filtered.length}`)
+        deleteFilm(filtered)
     }
 
     return (
