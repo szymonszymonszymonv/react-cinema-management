@@ -10,7 +10,6 @@ function AddScreening(props) {
         else {
             const input = <select type={type} id={id} placeholder={placeholder} onChange={e => { setValue(films.find(o => o.title === e.target.value)) }}> 
                 {   
-                    
                     films.map((item, key) => {
                         return (
                             <option value={item.title} key={key}> 
@@ -54,7 +53,6 @@ function AddScreening(props) {
 
     const buttonClick = () => {
         let copy = [...screenings]
-        let copyFilm = [...films]
         let dateInts = date.split("-").map((x) => {return parseInt(x)})
         dateInts[1] -= 1
         let newScreening = {
@@ -69,7 +67,6 @@ function AddScreening(props) {
         }
         copy.push(newScreening)
         setScreenings(copy)
-        // setScreeningList(copy)
         
 
 

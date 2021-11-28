@@ -86,7 +86,7 @@ class Main extends Component {
         let screeningsView = this.state.screenings.map((item, idx) => {
             return (
                 <div key={idx}>
-                    <Link to={`/film/${idx}`}>{item.film.title}</Link> <span>({item.film.duration}) </span>
+                    <Link to={`/film/${this.state.movies.indexOf(item.film)}`}>{item.film.title}</Link> <span>({item.film.duration}) </span>
                     <Link to={`seans/${idx}`}>
                         {item.time}
                     </Link>
