@@ -3,6 +3,8 @@ import { Route, Routes, Link } from 'react-router-dom'
 import Screening from './Screening';
 import Film from './Film'
 import AddFilm from './AddFilm';
+import AddScreening from './AddScreening';
+
 
 class Main extends Component {
     constructor(props) {
@@ -116,6 +118,7 @@ class Main extends Component {
         return ( 
             <div>
                 <p>SEANSE:</p>
+                <Link to={'/seans/add'}>  Add Screening </Link>
                 {this.displayScreenings()}
                 <p>FILMY:</p>
                 <Link to={`/film/add`}>  Add Film :) </Link>
@@ -124,6 +127,7 @@ class Main extends Component {
                     <Route path='/seans/:id' element={<Screening screenings={screenings} setScreenings={this.setScreenings}/>}/>
                     <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
+                    <Route path='/seans/add' element={<AddScreening films={movies} setFilms={this.setFilms} screenings={screenings} setScreenings={this.setScreenings} />}/>
                 </Routes>
             </div>
             );
