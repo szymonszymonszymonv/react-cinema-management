@@ -36,7 +36,34 @@ class Main extends Component {
                     cast: "Czarek"
                 }
             ],
-            screenings: []
+            rooms: [
+                {
+                    nr: 1,
+                    capacity: 20,
+                    howManyTaken: 0,
+                },
+                {
+                    nr: 2,
+                    capacity: 20,
+                    howManyTaken: 0,
+                },
+                {
+                    nr: 3,
+                    capacity: 20,
+                    howManyTaken: 0,
+                },
+                {
+                    nr: 4,
+                    capacity: 20,
+                    howManyTaken: 0,
+                },
+               {
+                    nr: 5,
+                    capacity: 20,
+                    howManyTaken: 0,
+                },
+            ],
+            screenings: [] 
         }
     }
 
@@ -47,7 +74,7 @@ class Main extends Component {
                     film: this.state.movies[0],
                     date: new Date(),
                     time: "18:00",
-                    room: 5,
+                    room: this.state.rooms[0],
                     soldTickets: 4,
                     availableTickets: 30,
                     takenSeats: [1, 2, 3, 4]
@@ -56,7 +83,7 @@ class Main extends Component {
                     film: this.state.movies[1],
                     date: new Date(),
                     time: "16:00",
-                    room: 3,
+                    room: this.state.rooms[1],
                     soldTickets: 1,
                     availableTickets: 33,
                     takenSeats: [5]
@@ -65,7 +92,7 @@ class Main extends Component {
                     film: this.state.movies[3],
                     date: new Date(),
                     time: "12:00",
-                    room: 1,
+                    room: this.state.rooms[2],
                     soldTickets: 3,
                     availableTickets: 15,
                     takenSeats: [5, 10, 11]
@@ -115,6 +142,7 @@ class Main extends Component {
         
         let screenings = this.state.screenings
         let movies = this.state.movies
+        let rooms = this.state.rooms
         return ( 
             <div>
                 <p>SEANSE:</p>
@@ -127,7 +155,7 @@ class Main extends Component {
                     <Route path='/seans/:id' element={<Screening screenings={screenings} setScreenings={this.setScreenings}/>}/>
                     <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
-                    <Route path='/seans/add' element={<AddScreening films={movies} setFilms={this.setFilms} screenings={screenings} setScreenings={this.setScreenings} />}/>
+                    <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
                 </Routes>
             </div>
             );
