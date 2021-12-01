@@ -15,14 +15,15 @@ function Screening(props) {
         setScreeningList(screening)
     }
 
+
     const displayScreening = () => {
         return (
             <div>
                 <p>{`tytuł: ${screening.film.title}`}</p>    
                 <p>{`data: ${screening.date.getFullYear()}.${screening.date.getMonth() + 1}.${screening.date.getDate()}`} </p>   
-                <p>{`godzina: ${screening.time}`}</p>    
-                <p>{`sala: ${Object.values(screening.room)[0]}`}</p> 
-                <p>{`sprzedane bilety: ${screening.soldTickets}`}</p>    
+                <p>{`godzina: ${screening.time}`}</p>
+                <p>{`sala: ${Object.values(screening.room)[0]}`}</p>
+                <p>{`sprzedane bilety: ${screening.soldTickets}`}</p>
                 <p>{`dostępne bilety: ${screening.availableTickets}`} </p>   
                 <p>{`zajęte miejsca: ${screening.takenSeats}`}</p>    
             </div>

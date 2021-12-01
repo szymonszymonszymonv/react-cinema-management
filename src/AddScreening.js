@@ -40,10 +40,7 @@ function AddScreening(props) {
 
                 return [value, input]
             }
-
-
         }
-
     }
 
 
@@ -74,9 +71,6 @@ function AddScreening(props) {
         }
         copy.push(newScreening)
         setScreenings(copy)
-
-
-
     }
 
 

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import DeleteFilm from "./DeleteFilm";
+import FilmPopularity from "./FilmPopularity";
 import { useParams, useNavigate } from "react-router";
 
 function Film(props) {
     const params = useParams()
     let navigate = useNavigate()
     const idx = params.id
-    const {films, setFilms } = props;
+    const {films, setFilms, screenings } = props;
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState(" ");
     const [duration, setDuration] = useState(" ");
@@ -126,6 +127,10 @@ function Film(props) {
           listaFilmow={listaFilmow}
           idx={idx}
         ></DeleteFilm>{" "}
+
+        <FilmPopularity film={films[idx]} screenings={screenings}>
+            
+        </FilmPopularity>
       </div>
     );
 }

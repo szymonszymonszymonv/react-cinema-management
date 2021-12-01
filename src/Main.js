@@ -57,7 +57,7 @@ class Main extends Component {
                     capacity: 20,
                     howManyTaken: 0,
                 },
-               {
+                {
                     nr: 5,
                     capacity: 20,
                     howManyTaken: 0,
@@ -74,6 +74,24 @@ class Main extends Component {
                     film: this.state.movies[0],
                     date: new Date(),
                     time: "18:00",
+                    room: this.state.rooms[0],
+                    soldTickets: 4,
+                    availableTickets: 30,
+                    takenSeats: [1, 2, 3, 4]
+                },
+                {
+                    film: this.state.movies[0],
+                    date: new Date(2021, 11, 2),
+                    time: "20:00",
+                    room: this.state.rooms[0],
+                    soldTickets: 4,
+                    availableTickets: 30,
+                    takenSeats: [1, 2, 3, 4]
+                },
+                {
+                    film: this.state.movies[0],
+                    date: new Date(2021, 11, 2),
+                    time: "23:00",
                     room: this.state.rooms[0],
                     soldTickets: 4,
                     availableTickets: 30,
@@ -153,7 +171,7 @@ class Main extends Component {
                 {this.displayFilms()}
                 <Routes>
                     <Route path='/seans/:id' element={<Screening screenings={screenings} setScreenings={this.setScreenings}/>}/>
-                    <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
+                    <Route path='/film/:id' element={<Film films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
                 </Routes>
