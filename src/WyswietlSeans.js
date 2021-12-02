@@ -3,40 +3,38 @@
 //import { useParams, useNavigate } from "react-router";
 import React, { useState } from 'react';
 
-function WyswietlSeans (props){
-  const { screenings} = props
-  const [date, setDate] = useState(" ");
-  //const [screeningList, setScreeningList] = useState(screenings)
-  const input = <input type="date"  onChange={e => {setDate(e.target.value)}} />
+function WyswietlSeans(props) {
+    const { screenings } = props
+    const [date, setDate] = useState(" ");
+    
+    const input = <input type="date" onChange={e => { setDate(e.target.value) }} />
 
 
-  let dateInts = []
-  let wypisac = []
-  let zmienna;
+    let dateInts = []
+    let wypisac = []
+    let zmienna;
 
-  dateInts = date.split("-").map((x) => {return parseInt(x)})
-  dateInts[1] -= 1
-  zmienna = new Date(...dateInts)
-  console.log(dateInts)
-  console.log(zmienna)
-  
-  
-  for(let i=0; i<screenings.length; i++){
-    if(date === screenings[i].date){
-      wypisac.push(screenings[i])
+    dateInts = date.split("-").map((x) => { return parseInt(x) })
+    dateInts[1] -= 1
+    zmienna = new Date(...dateInts)
+
+    for (let i = 0; i < screenings.length; i++) {
+        if (zmienna.getDate() === screenings[i].date.getDate()) {
+            wypisac.push(screenings[i])
+        }
     }
-  }
 
-  function WypiszTablice() {
-    let tablica = wypisac.map((item) => {      
-      return <span> {item.film} {item.date} {item.time} {item.room} {item.soldTickets} </span> 
-    });
-    return tablica;
-  }
+    function WypiszTablice() {
+        let tablica = wypisac.map((item, idx) => {
+            return <p key={idx}> tytuł: {item.film.title} / data: {item.date.toString()} /
+                pokój: {item.room.nr} / sprzedane bilety: {item.soldTickets} </p>
+        });
+        return tablica;
+    }
 
-  // const idx = params.id
-  // const screening = screeningList[idx]
- 
+    // const idx = params.id
+    // const screening = screeningList[idx]
+
     // const displayScreenings = () => {
     //   return (
     //       <div>
@@ -53,14 +51,14 @@ function WyswietlSeans (props){
 
 
     return (
-        <div>               
-          
-          {input}
-          {WypiszTablice()}
+        <div>
+
+            {input}
+            {WypiszTablice()}
 
         </div>
-          )
-      
+    )
+
 }
- 
+
 export default WyswietlSeans;
