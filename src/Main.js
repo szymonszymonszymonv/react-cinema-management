@@ -4,7 +4,7 @@ import Screening from './Screening';
 import Film from './Film'
 import AddFilm from './AddFilm';
 import AddScreening from './AddScreening';
-
+import WyswietlSeans from './WyswietlSeans';
 
 class Main extends Component {
     constructor(props) {
@@ -72,7 +72,7 @@ class Main extends Component {
             screenings: [
                 {
                     film: this.state.movies[0],
-                    date: new Date(),
+                    date: new Date(2021, 11, 1),
                     time: "18:00",
                     room: this.state.rooms[0],
                     soldTickets: 4,
@@ -99,7 +99,7 @@ class Main extends Component {
                 },
                 {
                     film: this.state.movies[1],
-                    date: new Date(),
+                    date: new Date(2021, 11, 1),
                     time: "16:00",
                     room: this.state.rooms[1],
                     soldTickets: 1,
@@ -108,7 +108,7 @@ class Main extends Component {
                 },
                 {
                     film: this.state.movies[3],
-                    date: new Date(),
+                    date: new Date(2021, 11, 2),
                     time: "12:00",
                     room: this.state.rooms[2],
                     soldTickets: 3,
@@ -174,7 +174,9 @@ class Main extends Component {
                     <Route path='/film/:id' element={<Film films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
+                    {/* <Route path='/seans/:seanse' element={<WyswietlSeans sseanse={screenings} setSeanse={this.setScreenings}/>}/> */}
                 </Routes>
+                <WyswietlSeans  screenings = {screenings} ></WyswietlSeans>
             </div>
             );
     }
