@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Screening from './Screening';
+import PropTypes from 'prop-types'
 
 function EditScreening(props) {
     
@@ -49,8 +50,30 @@ function EditScreening(props) {
             <button onClick={buttonClick}>Edytuj</button>
             
         </div>
-
     )
+}
+
+EditScreening.propTypes = {
+    setScreenings: PropTypes.func.isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    }).isRequired),
+    idx: PropTypes.number
 }
 
 export default EditScreening;

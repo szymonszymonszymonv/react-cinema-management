@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types'
 
 function AddFilm(props){
 
@@ -37,8 +38,17 @@ function AddFilm(props){
         </div>
           )
 
-
-
-
 }
+
+
+AddFilm.propTypes = {
+    films: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired,
+    setFilms: PropTypes.func.isRequired
+}
+
 export default AddFilm;

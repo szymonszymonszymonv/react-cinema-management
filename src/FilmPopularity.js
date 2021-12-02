@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types'
 
 function FilmPopularity(props) {
     const { screenings, film } = props
@@ -28,6 +28,34 @@ function FilmPopularity(props) {
             }
         </div>
     )
+}
+
+FilmPopularity.propTypes = {
+    film: PropTypes.shape({
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    }).isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    })).isRequired,
+    setFilms: PropTypes.func.isRequired
 }
 
 export default FilmPopularity;

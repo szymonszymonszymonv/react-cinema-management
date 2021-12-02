@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EditScreening from './EditScreening';
+import PropTypes from 'prop-types'
 
 
 function Screening(props) {
@@ -37,6 +38,29 @@ function Screening(props) {
             <EditScreening screenings={screenings} idx={idx} setScreenings={setScreenings}></EditScreening>
         </div>
     )
+}
+
+
+Screening.propTypes = {
+    setScreenings: PropTypes.func.isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    }).isRequired)
 }
 
 export default Screening;

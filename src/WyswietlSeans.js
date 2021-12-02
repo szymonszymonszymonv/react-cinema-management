@@ -1,12 +1,10 @@
-//import { useState } from 'react';
-//import { useParams } from 'react-router-dom';
-//import { useParams, useNavigate } from "react-router";
 import React, { useState } from 'react';
+import PropTypes from 'prop-types'
 
 function WyswietlSeans(props) {
     const { screenings } = props
     const [date, setDate] = useState(" ");
-    
+
     const input = <input type="date" onChange={e => { setDate(e.target.value) }} />
 
 
@@ -32,24 +30,6 @@ function WyswietlSeans(props) {
         return tablica;
     }
 
-    // const idx = params.id
-    // const screening = screeningList[idx]
-
-    // const displayScreenings = () => {
-    //   return (
-    //       <div>
-    //           <p>{`tytuł: ${screening.film.title}`}</p>    
-    //           <p>{`data: ${screening.date.getFullYear()}.${screening.date.getMonth() + 1}.${screening.date.getDate()}`} </p>   
-    //           <p>{`godzina: ${screening.time}`}</p>    
-    //           <p>{`sala: ${Object.values(screening.room)[0]}`}</p> 
-    //           <p>{`sprzedane bilety: ${screening.soldTickets}`}</p>    
-    //           <p>{`dostępne bilety: ${screening.availableTickets}`} </p>   
-    //           <p>{`zajęte miejsca: ${screening.takenSeats}`}</p>    
-    //       </div>
-    //   )
-    // }
-
-
     return (
         <div>
 
@@ -59,6 +39,28 @@ function WyswietlSeans(props) {
         </div>
     )
 
+}
+
+
+WyswietlSeans.propTypes = {
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    })).isRequired,
 }
 
 export default WyswietlSeans;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types'
 
 function AddScreening(props) {
     const useInput = (type, id, placeholder = "") => {
@@ -87,6 +88,40 @@ function AddScreening(props) {
         </div>
 
     )
+}
+
+
+AddScreening.propTypes = {
+    films: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    })).isRequired,
+    rooms: PropTypes.arrayOf(PropTypes.shape({
+        nr: PropTypes.number,
+        capacity: PropTypes.number,
+        howManyTaken: PropTypes.number
+    })).isRequired,
+    setScreenings: PropTypes.func.isRequired
 }
 
 export default AddScreening;

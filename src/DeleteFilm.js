@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types'
 
 
 function DeleteFilm (props){
@@ -20,6 +21,17 @@ function DeleteFilm (props){
         </div>
           )
       
+}
+
+DeleteFilm.propTypes = {
+    listaFilmow: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired,
+    idx: PropTypes.number.isRequired,
+    deleteFilm: PropTypes.func.isRequired
 }
  
 export default DeleteFilm;

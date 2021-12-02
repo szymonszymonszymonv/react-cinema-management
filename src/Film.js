@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DeleteFilm from "./DeleteFilm";
 import FilmPopularity from "./FilmPopularity";
 import { useParams, useNavigate } from "react-router";
+import PropTypes from 'prop-types'
 
 function Film(props) {
     const params = useParams()
@@ -133,6 +134,34 @@ function Film(props) {
         </FilmPopularity>
       </div>
     );
+}
+
+Film.propTypes = {
+    films: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    })).isRequired,
+    setFilms: PropTypes.func.isRequired
 }
 
 export default Film;

@@ -5,6 +5,7 @@ import Film from './Film'
 import AddFilm from './AddFilm';
 import AddScreening from './AddScreening';
 import WyswietlSeans from './WyswietlSeans';
+import PropTypes from 'prop-types'
 
 class Main extends Component {
     constructor(props) {
@@ -180,6 +181,38 @@ class Main extends Component {
             </div>
             );
     }
+}
+
+Main.propTypes = {
+    movies: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.number,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    })).isRequired,
+    rooms: PropTypes.arrayOf(PropTypes.shape({
+        nr: PropTypes.number,
+        capacity: PropTypes.number,
+        howManyTaken: PropTypes.number
+    })).isRequired,
 }
  
 export default Main;
