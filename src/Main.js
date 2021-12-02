@@ -4,7 +4,7 @@ import Screening from './Screening';
 import Film from './Film'
 import AddFilm from './AddFilm';
 import AddScreening from './AddScreening';
-
+import WyswietlSeans from './WyswietlSeans';
 
 class Main extends Component {
     constructor(props) {
@@ -156,7 +156,9 @@ class Main extends Component {
                     <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
+                    {/* <Route path='/seans/:seanse' element={<WyswietlSeans sseanse={screenings} setSeanse={this.setScreenings}/>}/> */}
                 </Routes>
+                <WyswietlSeans  screenings = {screenings} ></WyswietlSeans>
             </div>
             );
     }
