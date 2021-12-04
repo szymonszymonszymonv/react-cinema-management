@@ -1,0 +1,33 @@
+{
+    "movies": [
+      {
+        "id": "1",
+        "title": "james bond",
+        "duration": "130",
+        "description": "kfjkdfjagnjdg",
+        "cast": "Kuba"
+      },
+      {
+        "id": "2",
+        "title": "diuna",
+        "duration": "160",
+        "description": "llkll",
+        "cast": "Daria"
+      },
+      {
+        "id": "3",
+        "title": "licorice pizza",
+        "duration": "130",
+        "description": "mmmmmm",
+        "cast": "Czarek"
+      },
+      {
+        "id": "fb066351-4aa1-4476-8419-85cc36637236",
+        "title": "nowy film",
+        "duration": "120",
+        "description": "opis",
+        "cast": "bradley cooper"
+      }
+    ]
+  }
+  

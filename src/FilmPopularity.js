@@ -22,8 +22,8 @@ function FilmPopularity(props) {
     return (
         <div>
             {
-                Object.keys(screenings_by_days).map( (day) => {
-                    return <p>popularność dzień {day}: {screenings_by_days[day]}</p>
+                Object.keys(screenings_by_days).map( (day, idx) => {
+                    return <p key={idx}>popularność dzień {day}: {screenings_by_days[day]}</p>
                 })
             }
         </div>

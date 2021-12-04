@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 
 function DeleteFilm (props){
-    const {idx, listaFilmow, deleteFilm} = props
+    const { idx, listaFilmow, deleteFilm, onDeleteFilm } = props
     const film = listaFilmow[idx]
     const [listaFilmoww, setListaFilmow] = useState(listaFilmow)
+
+    const axiosDeleteFilm = (id) => {
+        axios.delete(`http://localhost:7777/movies/${id}`)
+        .then(res => { console.log(res) })
+    }
     
-    const buttonClickDelete = () => {  
+    const buttonClickDelete = () => {
+        let id = film.id  
         var filtered = listaFilmoww.filter((item) => item !== film)
         setListaFilmow( () => filtered)
-        console.log(`lista filmow w DeleteFilm: ${filtered.length}`)
+        onDeleteFilm(id)
+        axiosDeleteFilm(id)
         deleteFilm(filtered)
     }
+
+    
 
     return (
         <div>               
@@ -23,15 +33,15 @@ function DeleteFilm (props){
       
 }
 
-DeleteFilm.propTypes = {
-    listaFilmow: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string,
-        duration: PropTypes.string,
-        description: PropTypes.string,
-        cast: PropTypes.string
-    })).isRequired,
-    idx: PropTypes.number.isRequired,
-    deleteFilm: PropTypes.func.isRequired
-}
+// DeleteFilm.propTypes = {
+//     listaFilmow: PropTypes.arrayOf(PropTypes.shape({
+//         title: PropTypes.string,
+//         duration: PropTypes.string,
+//         description: PropTypes.string,
+//         cast: PropTypes.string
+//     })).isRequired,
+//     idx: PropTypes.number.isRequired,
+//     deleteFilm: PropTypes.func.isRequired
+// }
  
 export default DeleteFilm;
