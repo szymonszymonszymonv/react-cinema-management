@@ -1,0 +1,32 @@
+{
+    "movies": [
+        {
+            "id": 0,
+            "title": "kurier francuski",
+            "duration": "91m",
+            "description": "fsfggg",
+            "cast": "Kuba"
+        },
+        {
+            "id": 1,
+            "title": "james bond",
+            "duration": "130m",
+            "description": "kfjkdfjagnjdg",
+            "cast": "Kuba"
+        },
+        {
+            "id": 2,
+            "title": "diuna",
+            "duration": "160m",
+            "description": "llkll",
+            "cast": "Daria"
+        },
+        {
+            "id": 3,
+            "title": "licorice pizza",
+            "duration": "130m",
+            "description": "mmmmmm",
+            "cast": "Czarek"
+        }
+    ]
+}

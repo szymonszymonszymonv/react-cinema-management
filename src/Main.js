@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Routes, Link } from 'react-router-dom'
+import axios from 'axios'
 import Screening from './Screening';
 import Film from './Film'
 import AddFilm from './AddFilm';
@@ -69,6 +70,7 @@ class Main extends Component {
     }
 
     componentDidMount(){
+        this.fetchData()
         this.setState({
             screenings: [
                 {
@@ -118,6 +120,26 @@ class Main extends Component {
                 }
             ]
         })
+    }
+
+    fetchData = () => {
+        let data = null
+        axios.get("http://localhost:7777/")
+        .then(res => {
+              data = res.data;
+        })  
+        let {movies, screenings, rooms} = data
+        for(let screening of screenings){
+            let roomId = screening.room
+            let filmId = screening.film
+            screening.room = rooms.findIndex( (item) => {
+                return item.nr === roomId
+            })
+            screening.film = movies.findIndex( (item) => {
+                return item.id === filmId
+            })
+        }
+        
     }
 
     setScreenings = (screenings) => {
@@ -181,38 +203,6 @@ class Main extends Component {
             </div>
             );
     }
-}
-
-Main.propTypes = {
-    movies: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string,
-        duration: PropTypes.string,
-        description: PropTypes.string,
-        cast: PropTypes.string
-    })).isRequired,
-    screenings: PropTypes.arrayOf(PropTypes.shape({
-        film: PropTypes.shape({
-            title: PropTypes.string,
-            duration: PropTypes.string,
-            description: PropTypes.string,
-            cast: PropTypes.string
-        }).isRequired,
-        date: PropTypes.date,
-        time: PropTypes.string,
-        room: PropTypes.shape({
-            nr: PropTypes.number,
-            capacity: PropTypes.number,
-            howManyTaken: PropTypes.number
-        }).isRequired,
-        soldTickets: PropTypes.number,
-        availableTickets: PropTypes.number,
-        takenSeats: PropTypes.arrayOf(PropTypes.number)
-    })).isRequired,
-    rooms: PropTypes.arrayOf(PropTypes.shape({
-        nr: PropTypes.number,
-        capacity: PropTypes.number,
-        howManyTaken: PropTypes.number
-    })).isRequired,
 }
  
 export default Main;
