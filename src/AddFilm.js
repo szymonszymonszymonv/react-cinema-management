@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 function AddFilm(props){
 
@@ -18,14 +19,18 @@ function AddFilm(props){
 
     const buttonClick = () => {
         let copy = [...films];
+        let randId = crypto.randomUUID()
 
         let filmik = {
+            id: randId,
             title: title,
             duration: duration,
             description: description,
             cast: cast
         }
         copy.push(filmik);
+        axios.post("http://localhost:7777/movies", {movies: copy})
+        .then(res => { console.log(res) })
         //setListaFilmow(copy);
         setFilms(copy)
     };

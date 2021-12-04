@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 function Screening(props) {
     const params = useParams()
-    const { screenings, setScreenings } = props
+    const { films, screenings, setScreenings, rooms } = props
     const [screeningList, setScreeningList] = useState(screenings)
     const idx = params.id
     const screening = screeningList[idx]
@@ -23,7 +23,7 @@ function Screening(props) {
                 <p>{`tytuł: ${screening.film.title}`}</p>    
                 <p>{`data: ${screening.date.getFullYear()}.${screening.date.getMonth() + 1}.${screening.date.getDate()}`} </p>   
                 <p>{`godzina: ${screening.time}`}</p>
-                <p>{`sala: ${Object.values(screening.room)[0]}`}</p>
+                <p>{`sala: ${screening.room.nr}`}</p>
                 <p>{`sprzedane bilety: ${screening.soldTickets}`}</p>
                 <p>{`dostępne bilety: ${screening.availableTickets}`} </p>   
                 <p>{`zajęte miejsca: ${screening.takenSeats}`}</p>    
@@ -35,7 +35,7 @@ function Screening(props) {
         
         <div>
             {displayScreening()}
-            <EditScreening screenings={screenings} idx={idx} setScreenings={setScreenings}></EditScreening>
+            <EditScreening films={films} screenings={screenings} idx={idx} setScreenings={setScreenings}></EditScreening>
         </div>
     )
 }

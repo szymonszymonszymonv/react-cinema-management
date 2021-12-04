@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 function AddScreening(props) {
     const useInput = (type, id, placeholder = "") => {
@@ -44,12 +45,10 @@ function AddScreening(props) {
         }
     }
 
-
-
     const { films, rooms, screenings, setScreenings } = props
     const [title, titleInput] = useInput("select", "title")
     const [date, dateInput] = useInput("date", "date")
-    const [time, timeInput] = useInput("text", "time", "Add time")
+    const [time, timeInput] = useInput("time", "time", "Add time")
     const [room, roomInput] = useInput("select", "room")
     const [soldTickets, soldTicketsInput] = useInput("text", "soldTickets", "Add the number of  sold tickets")
     const [availableTickets, availableTicketsInput] = useInput("number", "availableTickets", "Add the number of available tickets")
@@ -60,7 +59,9 @@ function AddScreening(props) {
         let copy = [...screenings]
         let dateInts = date.split("-").map((x) => { return parseInt(x) })
         dateInts[1] -= 1
+        let randId = crypto.randomUUID()
         let newScreening = {
+            id: randId,
             film: title,
             date: new Date(...dateInts),
             time: time,
@@ -68,8 +69,20 @@ function AddScreening(props) {
             soldTickets: soldTickets,
             availableTickets: availableTickets,
             takenSeats: takenSeats.split(", "),
-
         }
+        let screeningJson = {
+            id: randId,
+            film: title.id,
+            date: new Date(...dateInts),
+            time: time,
+            room: room.nr,
+            soldTickets: soldTickets,
+            availableTickets: availableTickets,
+            takenSeats: takenSeats
+        }
+
+        axios.post("http://localhost:7777/screenings", {screening: screeningJson})
+        .then(res => { console.log(res) })
         copy.push(newScreening)
         setScreenings(copy)
     }

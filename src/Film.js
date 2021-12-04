@@ -3,12 +3,13 @@ import DeleteFilm from "./DeleteFilm";
 import FilmPopularity from "./FilmPopularity";
 import { useParams, useNavigate } from "react-router";
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 function Film(props) {
     const params = useParams()
     let navigate = useNavigate()
     const idx = params.id
-    const {films, setFilms, screenings } = props;
+    const {films, setFilms, screenings, onDeleteFilm } = props;
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState(" ");
     const [duration, setDuration] = useState(" ");
@@ -37,33 +38,41 @@ function Film(props) {
 
     const buttonClick = () => {
         let copy = [...listaFilmow];
-        copy[0].title = title;
+        copy[idx].title = title;
+        putFilms(copy)
         setListaFilmow(copy);
         setFilms(copy)
     };
 
     const buttonClickDuration = () => {
         let copy = [...listaFilmow];
-        copy[0].duration = duration;
-        setDuration(copy);
+        copy[idx].duration = duration;
+        putFilms(copy)
+        setListaFilmow(copy);
         setFilms(copy)
     };
 
     const buttonClickDescription = () => {
         let copy = [...listaFilmow];
-        copy[0].description = description;
-        setDescription(copy);
+        copy[idx].description = description;
+        putFilms(copy)
+        setListaFilmow(copy);
         setFilms(copy)
 
     };
 
     const buttonClickCast = () => {
         let copy = [...listaFilmow];
-        copy[0].cast = cast;
-        setCast(copy);
+        copy[idx].cast = cast;
+        putFilms(copy)
+        setListaFilmow(copy);
         setFilms(copy)
-
     };
+
+    const putFilms = (films) => {
+        axios.put("http://localhost:7777/movies", {movies: films})
+        .then(res => { console.log(res) })
+    }
 
     const deleteFilm = (films) => {
         if(idx <= films.length && films.length !== 0){
@@ -127,6 +136,7 @@ function Film(props) {
           deleteFilm={deleteFilm}
           listaFilmow={listaFilmow}
           idx={idx}
+          onDeleteFilm={onDeleteFilm}
         ></DeleteFilm>{" "}
 
         <FilmPopularity film={films[idx]} screenings={screenings}>
@@ -136,32 +146,32 @@ function Film(props) {
     );
 }
 
-Film.propTypes = {
-    films: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string,
-        duration: PropTypes.string,
-        description: PropTypes.string,
-        cast: PropTypes.string
-    })).isRequired,
-    screenings: PropTypes.arrayOf(PropTypes.shape({
-        film: PropTypes.shape({
-            title: PropTypes.string,
-            duration: PropTypes.string,
-            description: PropTypes.string,
-            cast: PropTypes.string
-        }).isRequired,
-        date: PropTypes.date,
-        time: PropTypes.string,
-        room: PropTypes.shape({
-            nr: PropTypes.number,
-            capacity: PropTypes.number,
-            howManyTaken: PropTypes.number
-        }).isRequired,
-        soldTickets: PropTypes.number,
-        availableTickets: PropTypes.number,
-        takenSeats: PropTypes.arrayOf(PropTypes.number)
-    })).isRequired,
-    setFilms: PropTypes.func.isRequired
-}
+// Film.propTypes = {
+//     films: PropTypes.arrayOf(PropTypes.shape({
+//         title: PropTypes.string,
+//         duration: PropTypes.string,
+//         description: PropTypes.string,
+//         cast: PropTypes.string
+//     })).isRequired,
+//     screenings: PropTypes.arrayOf(PropTypes.shape({
+//         film: PropTypes.shape({
+//             title: PropTypes.string,
+//             duration: PropTypes.string,
+//             description: PropTypes.string,
+//             cast: PropTypes.string
+//         }).isRequired,
+//         date: PropTypes.date,
+//         time: PropTypes.string,
+//         room: PropTypes.shape({
+//             nr: PropTypes.number,
+//             capacity: PropTypes.number,
+//             howManyTaken: PropTypes.number
+//         }).isRequired,
+//         soldTickets: PropTypes.number,
+//         availableTickets: PropTypes.number,
+//         takenSeats: PropTypes.arrayOf(PropTypes.number)
+//     })).isRequired,
+//     setFilms: PropTypes.func.isRequired
+// }
 
 export default Film;

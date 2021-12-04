@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Screening from './Screening';
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 function EditScreening(props) {
     
@@ -10,36 +11,66 @@ function EditScreening(props) {
         return [value, input]
     }
 
-    const { idx , screenings, setScreenings} = props
-    const [title, titleInput] = useInput("text", "title", "Tytuł")
+    const { idx, screenings, setScreenings, films, rooms } = props
     const [date, dateInput] = useInput("date", "date")
-    const [time, timeInput] = useInput("text", "time", "godzina")
+    const [time, timeInput] = useInput("time", "time", "godzina")
     const [room, roomInput] = useInput("number", "room", "sala")
     const [soldTickets, soldTicketsInput] = useInput("number", "soldTickets", "ilość sprzedanych biletów")
     const [avaTickets, avaTicketsInput] = useInput("number", "avaTickets", "ilość dostępnych biletów")
     const [takenSeats, takenSeatsInput] = useInput("text", "takenSeats", "zajęte miejsca")
+    const [film, setFilm] = useState(films[0])
     const [screeningList, setScreeningList] = useState(screenings)
+
+    const putScreening = (screening) => {
+        axios.put("http://localhost:7777/screenings", {screening: screening})
+        .then(res => { console.log(res) })
+    }
 
     const buttonClick = () => {
         let copy = [...screeningList]
 
-        copy[idx].film.title = title
+        copy[idx].film = film
         let dateInts = date.split("-").map((x) => {return parseInt(x)})
         dateInts[1] -= 1
         copy[idx].date = new Date(...dateInts)
         copy[idx].time = time
         copy[idx].room = room
         copy[idx].soldTickets = soldTickets
-        copy[idx].avaTickets = avaTickets
+        copy[idx].availableTickets = avaTickets
         copy[idx].takenSeats = takenSeats.split(", ")
-        
+
+        let screeningJson = {
+            id: copy[idx].id,
+            film: film.id,
+            date: dateInts,
+            time: time,
+            room: room, // FIXME: room.nr, select room
+            soldTickets: soldTickets,
+            availableTickets: avaTickets,
+            takenSeats: takenSeats
+        }
+
+        putScreening(screeningJson)
         setScreeningList(copy)
         setScreenings(copy)
     }
 
+
+
     return (
         <div>
-            {titleInput}
+            <select id={"id"} onChange={e => { setFilm(films.find(film => film.title === e.target.value)) }}>
+                {
+                    films.map((item, key) => {
+                        return (
+                            <option value={item.title} key={key}>
+                                {item.title}
+                            </option>
+                        )
+                    })
+                }
+            </select>
+
             {dateInput}
             {timeInput}
             {roomInput}
