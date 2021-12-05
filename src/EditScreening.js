@@ -10,7 +10,7 @@ function EditScreening(props) {
         const input = <input type={type} id={id} placeholder={placeholder} onChange={e => {setValue(e.target.value)}}  />
         return [value, input]
     }
-
+    
     const { idx, screenings, setScreenings, films, rooms } = props
     const [date, dateInput] = useInput("date", "date")
     const [time, timeInput] = useInput("time", "time", "godzina") //godzina 16 time=16

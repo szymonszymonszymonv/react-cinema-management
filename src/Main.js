@@ -29,14 +29,13 @@ class Main extends Component {
         .then(res => {
               data = res.data;
               let {movies, screenings, rooms} = data
-              console.log(data)
               for(let screening of screenings){
                   let roomId = screening.room
                   let filmId = screening.film
                   let date = new Date(...screening.date)
                   screening.date = date
                   screening.room = rooms.find( (item) => {
-                      return item.nr === roomId
+                      return item.nr === parseInt(roomId)
                   })
                   screening.film = movies.find( (item) => {
                       return item.id === filmId
@@ -112,8 +111,6 @@ class Main extends Component {
         let rooms = this.state.rooms
         return ( 
             <div>
-                <p>KUP BILET:</p>
-                <Link to={'/buyTicket'}>  Buy Ticket </Link>
                 <p>SEANSE:</p>
                 <Link to={'/seans/add'}>  Add Screening </Link>
                 {this.displayScreenings()}
@@ -121,15 +118,18 @@ class Main extends Component {
                 <Link to={`/film/add`}>  Add Film :) </Link>
                 {this.displayFilms()}
                 <Routes>
-                    <Route path='/seans/:id' element={<Screening rooms={rooms} films={movies} screenings={screenings} setScreenings={this.setScreenings}/>}/>
+                    {/* <Route path='/films' element={<Films onDeleteFilm={this.onDeleteFilm} films={movies} setFilms={this.setFilms} />}/> */}
                     <Route path='/film/:id' element={<Film onDeleteFilm={this.onDeleteFilm} films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
-                    <Route path='/buyTicket' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
+                    <Route path='/seans/:id/' element={<Screening rooms={rooms} films={movies} screenings={screenings} setScreenings={this.setScreenings}/>}>
+
+                    </Route>
+                    <Route path='seans/:id/buy' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
 
                     {/* <Route path='/seans/:seanse' element={<WyswietlSeans sseanse={screenings} setSeanse={this.setScreenings}/>}/> */}
                 </Routes>
-                <WyswietlSeans  screenings = {screenings} ></WyswietlSeans>
+                {/* <WyswietlSeans  screenings = {screenings} ></WyswietlSeans> */}
             </div>
             );
     }

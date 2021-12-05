@@ -10,8 +10,18 @@ function FilmPopularity(props) {
             continue
         }
         let day = screening.date.getDate()
+        let month = screening.date.getMonth() + 1
+        let year = screening.date.getFullYear()
+        console.log(year)
         if(!screenings_by_days[day]){
-            screenings_by_days[day] = screening.soldTickets
+            screenings_by_days[day] = {
+                sold: screening.soldTickets,
+                month: month,
+                year: year,
+            }
+            // screenings_by_days[day] = screening.soldTickets
+            // screenings_by_days[day].month = month
+            // screenings_by_days[day].year = year
         }
         else{
             screenings_by_days[day] += screening.soldTickets
@@ -23,7 +33,7 @@ function FilmPopularity(props) {
         <div>
             {
                 Object.keys(screenings_by_days).map( (day, idx) => {
-                    return <p key={idx}>popularność dzień {day}: {screenings_by_days[day]}</p>
+                    return <p key={idx}>popularność dzień {day}.{screenings_by_days[day].month}.{screenings_by_days[day].year}: {screenings_by_days[day].sold}</p>
                 })
             }
         </div>

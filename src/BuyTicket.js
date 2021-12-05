@@ -3,19 +3,22 @@ import { useParams } from 'react-router-dom';
 
 function BuyTicket(props) {
 
+    
     const { screenings, setScreenings } = props
-    const [chosenScreening, setChosenScreening] = useState(screenings[0])
+    let params = useParams()
+    let id = params.id
+    let chosenScreeningParam = screenings[id]
     const [chosenSeat, setChosenSeat] = useState()
 
 
     let seatObject = {}
 
 
-    for (let i = 1; i <= chosenScreening.room.capacity; i++) {
+    for (let i = 1; i <= chosenScreeningParam.room.capacity; i++) {
         seatObject[i] = "free"
     }
 
-    for (let seat of chosenScreening.takenSeats) {
+    for (let seat of chosenScreeningParam.takenSeats) {
         seatObject[seat] = "taken"
     }
 
@@ -27,7 +30,7 @@ function BuyTicket(props) {
 
     const buttonClick = () => {
         let copy = [...screenings]
-        let idx = screenings.indexOf(chosenScreening)
+        let idx = screenings.indexOf(chosenScreeningParam)
         seatObject[chosenSeat] = "taken"
 
 
@@ -45,18 +48,6 @@ function BuyTicket(props) {
 
     return (
         <div>
-            <select id={"id"} onChange={e => { setChosenScreening(screenings.find(o => o.film.title === e.target.value)) }}>
-                {
-                    screenings.map((item, key) => {
-                        return (
-                            <option value={item.film.title} key={key}>
-                                {item.film.title}
-                            </option>
-                        )
-                    })
-                }
-            </select>
-
             <select id={"id"} onChange={e => { setChosenSeat(e.target.value) }}>
                 {
                     Object.keys(seatObject).map((item, key) => {

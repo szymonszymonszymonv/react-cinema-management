@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import EditScreening from './EditScreening';
+import BuyTicket from './BuyTicket';
 import PropTypes from 'prop-types'
 
 
@@ -37,6 +38,9 @@ function Screening(props) {
         <div>
             {displayScreening()}
             <EditScreening films={films} screenings={screenings} idx={idx} setScreenings={setScreenings}></EditScreening>
+
+            <p>KUP BILET:</p>
+            <Link to={`buy`}>  Buy Ticket </Link>
         </div>
     )
 }
