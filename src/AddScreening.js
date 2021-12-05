@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
@@ -23,7 +23,7 @@ function AddScreening(props) {
                     }
                 </select>
 
-                return [value, input]
+                return [value, input, setValue]
             }
             else {
                 const input = <select type={type} id={id} placeholder={placeholder} onChange={e => { setValue(rooms.find(o => o.nr == e.target.value)) }}>
@@ -40,21 +40,70 @@ function AddScreening(props) {
                     }
                 </select>
 
-                return [value, input]
+                return [value, input, setValue]
             }
         }
     }
 
     const { films, rooms, screenings, setScreenings } = props
-    const [title, titleInput] = useInput("select", "title")
+    const [title, titleInput, setTitle] = useInput("select", "title")
     const [date, dateInput] = useInput("date", "date")
     const [time, timeInput] = useInput("time", "time", "Add time")
-    const [room, roomInput] = useInput("select", "room")
-    const [soldTickets, soldTicketsInput] = useInput("text", "soldTickets", "Add the number of  sold tickets")
-    const [availableTickets, availableTicketsInput] = useInput("number", "availableTickets", "Add the number of available tickets")
-    const [takenSeats, takenSeatsInput] = useInput("text", "takenSeats", "Add list of taken seats: e.g (1 ,2 ,3 ,4 ,5 )")
+    const [room, roomInput, setRoom] = useInput("select", "room")
+
+    useEffect(() => {
+        setTitle(films[0])
+        setRoom(rooms[0])
+    }, [])
+
+    let today = new Date();
+
+    // let currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let currentDate = today.getTime()
+    currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    let currentHour = today.getHours() + ":" + today.getMinutes();
+    
+    const [errors, setErrors] = useState({})
+    let fields = { title: title, date: date, time: time, room: room }
+
+    function handleValidation() {
+        let errors = {}
+        let formIsValid = true
+        let dateInts = date.split("-").map((x) => { return parseInt(x) })
+        dateInts[1] -= 1
+
+        let inputDate = new Date(...dateInts)
+        inputDate = inputDate.getTime()
+        
+        
+        for (const [key, value] of Object.entries(fields)) {
+            if (!value) {
+                formIsValid = false
+                errors[key] = `${key} cannot be empty`
+            }
+            else if (value === date) {
+                if (inputDate < currentDate) {
+                    formIsValid = false
+                    errors[key] = `current date is greater than entered time${key} `
+                    
+                }
+            }
+            else if (value === time) {
+                if (inputDate == currentDate.getTime() && value < currentHour) { // The ==, !=, ===, and !== operators require you to use date.getTime() as in
+                    formIsValid = false
+                    errors[key] = `current date and time  is greater than entered time${key} `
+                    
+                }
+
+            }
+        }
 
 
+
+
+        setErrors(errors)
+        return formIsValid
+    }
     const buttonClick = () => {
         let copy = [...screenings]
         let dateInts = date.split("-").map((x) => { return parseInt(x) })
@@ -66,9 +115,9 @@ function AddScreening(props) {
             date: new Date(...dateInts),
             time: time,
             room: room,
-            soldTickets: soldTickets,
-            availableTickets: availableTickets,
-            takenSeats: takenSeats.split(", "),
+            soldTickets: 0,
+            availableTickets: room.capacity,
+            takenSeats: [],
         }
         let screeningJson = {
             id: randId,
@@ -76,27 +125,35 @@ function AddScreening(props) {
             date: new Date(...dateInts),
             time: time,
             room: room.nr,
-            soldTickets: soldTickets,
-            availableTickets: availableTickets,
-            takenSeats: takenSeats
+            soldTickets: 0,
+            availableTickets: room.capacity,
+            takenSeats: []
         }
 
-        axios.post("http://localhost:7777/screenings", {screening: screeningJson})
-        .then(res => { console.log(res) })
-        copy.push(newScreening)
-        setScreenings(copy)
+        if (handleValidation()) {
+            axios.post("http://localhost:7777/screenings", { screening: screeningJson })
+                .then(res => { console.log(res) })
+            copy.push(newScreening)
+            setScreenings(copy)
+        }
+
+
+
     }
 
 
     return (
         <div className="dodaj_seans">
-            {titleInput}
-            {dateInput}
-            {timeInput}
-            {roomInput}
-            {soldTicketsInput}
-            {availableTicketsInput}
-            {takenSeatsInput}
+            {"film: "}{titleInput}
+            <p style={{ color: "red" }}>{errors["title"]}</p>
+            {"data: "}{dateInput}
+            <p style={{ color: "red" }}>{errors["date"]}</p>
+            {"godzina: "}{timeInput}
+            <p style={{ color: "red" }}>{errors["time"]}</p>
+            {"nr. sali: "} {roomInput}
+            <p style={{ color: "red" }}>{errors["room"]}</p>
+
+
             <button onClick={buttonClick}>Dodaj seans</button>
         </div>
     )

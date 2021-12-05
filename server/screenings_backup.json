@@ -6,9 +6,9 @@
       "date": [2021, 11, 1],
       "time": "18:00",
       "room": "1",
-      "soldTickets": 4,
-      "availableTickets": 30,
-      "takenSeats": [1, 2, 3, 4]
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
     },
     {
       "id": "1",
@@ -16,9 +16,9 @@
       "date": [2021, 11, 2],
       "time": "20:00",
       "room": "2",
-      "soldTickets": 4,
-      "availableTickets": 30,
-      "takenSeats": [1, 2, 3, 4]
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
     },
     {
       "id": "2",
@@ -26,9 +26,9 @@
       "date": [2021, 11, 2],
       "time": "23:00",
       "room": "3",
-      "soldTickets": 4,
-      "availableTickets": 30,
-      "takenSeats": [1, 2, 3, 4]
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
     },
     {
       "id": "3",
@@ -36,9 +36,9 @@
       "date": [2021, 11, 1],
       "time": "16:00",
       "room": "1",
-      "soldTickets": 1,
-      "availableTickets": 33,
-      "takenSeats": [5]
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
     },
     {
       "id": "4",
@@ -46,9 +46,9 @@
       "date": [2021, 11, 2],
       "time": "12:00",
       "room": "5",
-      "soldTickets": 3,
-      "availableTickets": 15,
-      "takenSeats": [5, 10, 11]
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
     }
   ]
 }

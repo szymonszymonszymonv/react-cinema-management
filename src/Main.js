@@ -42,6 +42,7 @@ class Main extends Component {
                   screening.film = movies.find( (item) => {
                       return item.id === filmId
                   })
+
               }
       
               this.setState({
@@ -85,7 +86,6 @@ class Main extends Component {
                     <Link to={`seans/${idx}`}>
                         {item.time}
                     </Link>
-                    
                 </div>
             )
         })
