@@ -1,33 +1,46 @@
 {
     "movies": [
-      {
-        "id": "1",
-        "title": "james bond",
-        "duration": "130",
-        "description": "kfjkdfjagnjdg",
-        "cast": "Kuba"
-      },
-      {
-        "id": "2",
-        "title": "diuna",
-        "duration": "160",
-        "description": "llkll",
-        "cast": "Daria"
-      },
-      {
-        "id": "3",
-        "title": "licorice pizza",
-        "duration": "130",
-        "description": "mmmmmm",
-        "cast": "Czarek"
-      },
-      {
-        "id": "fb066351-4aa1-4476-8419-85cc36637236",
-        "title": "nowy film",
-        "duration": "120",
-        "description": "opis",
-        "cast": "bradley cooper"
-      }
+        {
+            "id": "2",
+            "title": "Diuna",
+            "duration": "160",
+            "description": "Szlachetny ród Atrydów przybywa na Diunę, będącą jedynym źródłem najcenniejszej substancji we wszechświecie.",
+            "cast": "Daria"
+        },
+        {
+            "id": "3",
+            "title": "Licorice Pizza",
+            "duration": "120",
+            "description": "Szczenięce zauroczenie dorastających w Los Angeles Alany i Gary’ego rozwija się na tle wielkich przemian kulturowych czasu wolnej miłości.",
+            "cast": "Czarek Poniatowski"
+        },
+        {
+            "id": "fb066351-4aa1-4476-8419-85cc36637236",
+            "title": "Shrek",
+            "duration": " 125",
+            "description": " Shrek jest zielony i kocha Fionę.",
+            "cast": " "
+        },
+        {
+            "id": "e0d271bc-ac71-42d3-9f5e-d4cf402bfad5",
+            "title": "Harry Potter",
+            "duration": "1750",
+            "description": "W dniu jedenastych urodzin Harry dowiaduje się, że jest czarodziejem. Czeka na niego szkoła magii pełna tajemnic.",
+            "cast": "Hermiona"
+        },
+        {
+            "id": "4",
+            "title": "Toy Story",
+            "duration": "90",
+            "description": "W świecie zabawek Andy'ego, których niekwestionowanym liderem był dotychczas kowboj Chudy, pojawia się nowa zabawka - astronauta Buzz.",
+            "cast": "Daniel Radcliffe, Rupert Grint "
+        },
+        {
+            "id": "82e44c63-27c6-448e-8113-cbd7502fc408",
+            "title": "Dom Gucci",
+            "duration": "155",
+            "description": "Historia Patrizii Reggiani, byłej żony Maurizio Gucciego, która planowała zabić swojego męża, wnuka znanego projektanta mody Guccio Gucci.",
+            "cast": "Lady Gaga, Jared Leto"
+        }
     ]
-  }
-  
+}

@@ -35,9 +35,7 @@ function EditScreening(props) {
                                 <option value={item.nr} key={key}>
                                     {item.nr}
                                 </option>
-
                             )
-
                         })
                     }
                 </select>
@@ -60,6 +58,53 @@ function EditScreening(props) {
         setRoom(rooms[0])
     }, [])
 
+    let today = new Date();
+
+    let currentDate = today.getTime()
+    currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    let currentHour = today.getHours() + ":" + today.getMinutes();
+    
+    const [errors, setErrors] = useState({})
+    let fields = { title: title, date: date, time: time, room: room }
+
+    function handleValidation() {
+        let errors = {}
+        let formIsValid = true
+        let dateInts = date.split("-").map((x) => { return parseInt(x) })
+        dateInts[1] -= 1
+
+        let inputDate = new Date(...dateInts)
+        inputDate = inputDate.getTime()
+        console.log(currentDate)
+        console.log(inputDate)
+        
+        for (const [key, value] of Object.entries(fields)) {
+            if (!value) {
+                formIsValid = false
+                errors[key] = `${key} cannot be empty`
+            }
+            else if (value === date) {
+                if (inputDate < currentDate) {
+                    formIsValid = false
+                    errors[key] = `current date is greater than entered time ${key} `
+                }
+            }
+            else if (value === time) {
+                let time1 = value.split(':')
+                let totalSeconds1 = parseInt(time1[0] * 3600 + time1[1] * 60)
+                
+                let time2 = currentHour.split(':')
+                let totalSeconds2 = parseInt(time2[0] * 3600 + time2[1] * 60)
+                
+                if (inputDate === currentDate.getTime() && totalSeconds1 < totalSeconds2) { // The ==, !=, ===, and !== operators require you to use date.getTime()
+                    formIsValid = false
+                    errors[key] = `current  time  is greater than entered date and ${key} `    
+                }
+            }
+        }
+        setErrors(errors)
+        return formIsValid
+    }
 
     const putScreening = (screening) => {
         axios.put("http://localhost:7777/screenings", { screening: screening })
@@ -88,21 +133,26 @@ function EditScreening(props) {
             takenSeats: copy[idx].takenSeats
         }
 
-        putScreening(screeningJson)
-        setScreeningList(copy)
-        setScreenings(copy)
+        if(handleValidation()){
+            putScreening(screeningJson)
+            setScreeningList(copy)
+            setScreenings(copy)
+        }
     }
 
 
 
     return (
         <div>
-            {titleInput}
-            {dateInput}
-            {timeInput}
-            {roomInput}
+            {"film: "}{titleInput}
+            <p style={{ color: "red" }}>{errors["title"]}</p>
+            {"data: "}{dateInput}
+            <p style={{ color: "red" }}>{errors["date"]}</p>
+            {"godzina: "}{timeInput}
+            <p style={{ color: "red" }}>{errors["time"]}</p>
+            {"nr. sali: "} {roomInput}
+            <p style={{ color: "red" }}>{errors["room"]}</p>
             
-
             <button onClick={buttonClick}>Edytuj</button>
         </div>
     )
