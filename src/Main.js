@@ -1,104 +1,56 @@
 import React, { Component } from 'react';
 import { Route, Routes, Link } from 'react-router-dom'
+import axios from 'axios'
 import Screening from './Screening';
 import Film from './Film'
 import AddFilm from './AddFilm';
 import AddScreening from './AddScreening';
 import BuyTicket from './BuyTicket';
+import WyswietlSeans from './WyswietlSeans';
+import PropTypes from 'prop-types'
 
 class Main extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            movies: [
-                {
-                    title: "kurier francuski",
-                    duration: "91m",
-                    description: "fsfggg",
-                    cast: "Kuba"
-                },
-                {
-                    title: "james bond",
-                    duration: "130m",
-                    description: "kfjkdfjagnjdg",
-                    cast: "Kuba"
-                },
-                {
-                    title: "diuna",
-                    duration: "160m",
-                    description: "llkll",
-                    cast: "Daria"
-                },
-                {
-                    title: "licorice pizza",
-                    duration: "130m",
-                    description: "mmmmmm",
-                    cast: "Czarek"
-                }
-            ],
-            rooms: [
-                {
-                    nr: 1,
-                    capacity: 20,
-                    howManyTaken: 0,
-                },
-                {
-                    nr: 2,
-                    capacity: 20,
-                    howManyTaken: 0,
-                },
-                {
-                    nr: 3,
-                    capacity: 20,
-                    howManyTaken: 0,
-                },
-                {
-                    nr: 4,
-                    capacity: 20,
-                    howManyTaken: 0,
-                },
-               {
-                    nr: 5,
-                    capacity: 20,
-                    howManyTaken: 0,
-                },
-            ],
+            movies: [],
+            rooms: [],
             screenings: [] 
         }
     }
 
     componentDidMount(){
-        this.setState({
-            screenings: [
-                {
-                    film: this.state.movies[0],
-                    date: new Date(),
-                    time: "18:00",
-                    room: this.state.rooms[0],
-                    soldTickets: 4,
-                    availableTickets: 30,
-                    takenSeats: [1, 2, 3, 4]
-                },
-                {
-                    film: this.state.movies[1],
-                    date: new Date(),
-                    time: "16:00",
-                    room: this.state.rooms[1],
-                    soldTickets: 1,
-                    availableTickets: 33,
-                    takenSeats: [5]
-                },
-                {
-                    film: this.state.movies[3],
-                    date: new Date(),
-                    time: "12:00",
-                    room: this.state.rooms[2],
-                    soldTickets: 3,
-                    availableTickets: 15,
-                    takenSeats: [5, 10, 11]
-                }
-            ]
-        })
+        this.fetchData()
+    }
+
+    fetchData = () => {
+        let data = null
+        axios.get("http://localhost:7777/")
+        .then(res => {
+              data = res.data;
+              let {movies, screenings, rooms} = data
+              console.log(data)
+              for(let screening of screenings){
+                  let roomId = screening.room
+                  let filmId = screening.film
+                  let date = new Date(...screening.date)
+                  screening.date = date
+                  screening.room = rooms.find( (item) => {
+                      return item.nr === roomId
+                  })
+                  screening.film = movies.find( (item) => {
+                      return item.id === filmId
+                  })
+              }
+      
+              this.setState({
+                  movies: movies,
+                  rooms: rooms,
+                  screenings: screenings
+              })
+        })  
+        
+        
     }
 
     setScreenings = (screenings) => {
@@ -107,6 +59,21 @@ class Main extends Component {
 
     setFilms = (films) => {
         this.setState({movies: films}, () => {console.log(this.state.movies)})
+    }
+    
+    onDeleteFilm = (filmId) => {
+        for(let screening of this.state.screenings){
+            let id = screening.film.id
+            if(id === filmId){
+                axios.delete(`http://localhost:7777/screenings/${screening.id}`)
+                .then(res => { console.log(res) })
+            }
+        }
+        let filtered = this.state.screenings.filter( (x) => {
+            return x.film.id !== filmId
+        })
+        this.setState( () => {return {screenings: filtered}})
+        
     }
 
     displayScreenings = () => {
@@ -154,13 +121,15 @@ class Main extends Component {
                 <Link to={`/film/add`}>  Add Film :) </Link>
                 {this.displayFilms()}
                 <Routes>
-                    <Route path='/seans/:id' element={<Screening screenings={screenings} setScreenings={this.setScreenings}/>}/>
-                    <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
+                    <Route path='/seans/:id' element={<Screening rooms={rooms} films={movies} screenings={screenings} setScreenings={this.setScreenings}/>}/>
+                    <Route path='/film/:id' element={<Film onDeleteFilm={this.onDeleteFilm} films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
                     <Route path='/buyTicket' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
 
+                    {/* <Route path='/seans/:seanse' element={<WyswietlSeans sseanse={screenings} setSeanse={this.setScreenings}/>}/> */}
                 </Routes>
+                <WyswietlSeans  screenings = {screenings} ></WyswietlSeans>
             </div>
             );
     }
