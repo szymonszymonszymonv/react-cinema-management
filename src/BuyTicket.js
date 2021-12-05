@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
 function BuyTicket(props) {
-
     
     const { screenings, setScreenings } = props
     let params = useParams()
@@ -11,9 +10,7 @@ function BuyTicket(props) {
     let chosenScreeningParam = screenings[id]
     const [chosenSeat, setChosenSeat] = useState()
 
-
     let seatObject = {}
-
 
     for (let i = 1; i <= chosenScreeningParam.room.capacity; i++) {
         seatObject[i] = "free"
@@ -28,12 +25,10 @@ function BuyTicket(props) {
         console.log("IM IN USE EFFECT")
     }, [])  // działa jak componentDidMount
  
-
     const buttonClick = () => {
         let copy = [...screenings]
         let idx = screenings.indexOf(chosenScreeningParam)
         seatObject[chosenSeat] = "taken"
-
 
 
         copy[idx].availableTickets--
@@ -97,10 +92,6 @@ BuyTicket.propTypes = {
 }
 
 export default BuyTicket
-
-
-
-
 
 
 
