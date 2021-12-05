@@ -23,7 +23,10 @@ function WyswietlSeans(props) {
 
     for (let i = 0; i < screenings.length; i++) {
         let timeInt = screenings[i].time.split(":").map((x) => { return parseInt(x) })
-        if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0] && timeInt[1] >= timeInts[1]) {
+        if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0]) {
+            if(timeInt[0] === timeInts[0] && timeInt[1] < timeInts[1]){
+                continue
+            }
             wypisac.push(screenings[i])
         }
     }
