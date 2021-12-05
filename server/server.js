@@ -14,7 +14,12 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/', (req, res) => {
-    console.log(`GET: /`)
+    let request = `GET: /\n`
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     let moviesJson = JSON.parse(fs.readFileSync('./movies.json'))
     let screeningsJson = JSON.parse(fs.readFileSync('./screenings.json'))
     let roomsJson = JSON.parse(fs.readFileSync('./rooms.json'))
@@ -23,8 +28,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/movies', (req, res) => {
-    console.log(`POST: /movies`)
     let movies = JSON.stringify({movies: req.body.movies})
+
+    let request = `POST: /movies\n`
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     console.log(movies)
     fs.writeFile('./movies.json', movies, err => {
         if(err) {
@@ -39,8 +50,13 @@ app.post('/movies', (req, res) => {
 })
 
 app.put('/movies', (req, res) => {
-    console.log(`PUT: /movies`)
     let movies = JSON.stringify({movies: req.body.movies})
+    let request = `PUT: /movies\n`
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     console.log(movies)
     fs.writeFile('./movies.json', movies, err => {
         if(err) {
@@ -55,8 +71,13 @@ app.put('/movies', (req, res) => {
 
 app.delete('/movies/:id', (req, res) => {
     let movieId = req.params.id
-    console.log(`DELETE: /movies/${movieId}`)
     console.log(movieId)
+    let request = `DELETE: /movies/${movieId}\n`
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     let moviesJson = JSON.parse(fs.readFileSync('./movies.json'))
     let filtered = moviesJson.movies.filter( (x) => {
         return x.id !== movieId
@@ -76,8 +97,13 @@ app.delete('/movies/:id', (req, res) => {
 })
 
 app.post('/screenings', (req, res) => {
-    console.log(`POST: /screenings`)
     let screening = req.body.screening
+    let request = `POST: /screenings\n`
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     console.log(screening)
     let screeningsJson = JSON.parse(fs.readFileSync('./screenings.json'))
     screeningsJson.screenings.push(screening)
@@ -95,7 +121,12 @@ app.post('/screenings', (req, res) => {
 })
 
 app.put('/screenings', (req, res) => {
-    console.log(`PUT: /screenings`)
+    let request = "PUT: /screenings\n"
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     let screening = req.body.screening
     console.log(screening)
     let screeningsJson = JSON.parse(fs.readFileSync('./screenings.json'))
@@ -122,7 +153,12 @@ app.put('/screenings', (req, res) => {
 
 app.delete('/screenings/:id', (req, res) => {
     let id = req.params.id
-    console.log(`DELETE: /screenings/${id}`)
+    let request = `DELETE: /screenings/${id}\n`
+    console.log(request)
+    fs.appendFile('requests.txt', request, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     let screeningsJson = JSON.parse(fs.readFileSync('./screenings.json'))
 
     let filtered = screeningsJson.screenings.filter( (x) => {
