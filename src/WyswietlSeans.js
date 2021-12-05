@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState , useInput} from 'react';
 import PropTypes from 'prop-types'
 
 function WyswietlSeans(props) {
     const { screenings } = props
     const [date, setDate] = useState(" ");
+    const [time, setTime] = useState(" ");
 
     const input = <input type="date" onChange={e => { setDate(e.target.value) }} />
-
+    const inputTime = <input type="time" onChange={e => { setTime(e.target.value) }} />
+    
 
     let dateInts = []
+    let timeInts = []
     let wypisac = []
     let zmienna;
 
@@ -16,8 +19,13 @@ function WyswietlSeans(props) {
     dateInts[1] -= 1
     zmienna = new Date(...dateInts)
 
+    timeInts = time.split(":").map((x) => { return parseInt(x) })
+
+
+
     for (let i = 0; i < screenings.length; i++) {
-        if (zmienna.getDate() === screenings[i].date.getDate()) {
+        let timeInt = screenings[i].time.split(":").map((x) => { return parseInt(x) })
+        if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0] && timeInt[1] >= timeInts[1]) {
             wypisac.push(screenings[i])
         }
     }
@@ -34,6 +42,7 @@ function WyswietlSeans(props) {
         <div class="seans_data">
 
             {input}
+            {inputTime}
             {WypiszTablice()}
 
         </div>

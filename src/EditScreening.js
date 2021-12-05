@@ -79,7 +79,6 @@ function EditScreening(props) {
             {takenSeatsInput}
 
             <button onClick={buttonClick}>Edytuj</button>
-            
         </div>
     )
 }
