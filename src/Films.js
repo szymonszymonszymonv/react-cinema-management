@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 function Films(props) {
     const { films } = props
@@ -24,5 +25,16 @@ function Films(props) {
         </div>
     )
 }
+
+Films.propTypes = {
+    films: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired
+}
+
 
 export default Films;
