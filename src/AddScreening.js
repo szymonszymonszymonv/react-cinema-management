@@ -56,40 +56,54 @@ function AddScreening(props) {
         setRoom(rooms[0])
     }, [])
 
+    let today = new Date();
 
+    // let currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let currentDate = today.getTime()
+    currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    let currentHour = today.getHours() + ":" + today.getMinutes();
+    
     const [errors, setErrors] = useState({})
     let fields = { title: title, date: date, time: time, room: room }
 
     function handleValidation() {
         let errors = {}
         let formIsValid = true
+        let dateInts = date.split("-").map((x) => { return parseInt(x) })
+        dateInts[1] -= 1
 
+        let inputDate = new Date(...dateInts)
+        inputDate = inputDate.getTime()
+        
+        
         for (const [key, value] of Object.entries(fields)) {
             if (!value) {
                 formIsValid = false
                 errors[key] = `${key} cannot be empty`
             }
+            else if (value === date) {
+                if (inputDate < currentDate) {
+                    formIsValid = false
+                    errors[key] = `current date is greater than entered time${key} `
+                    
+                }
+            }
+            else if (value === time) {
+                if (inputDate == currentDate.getTime() && value < currentHour) { // The ==, !=, ===, and !== operators require you to use date.getTime() as in
+                    formIsValid = false
+                    errors[key] = `current date and time  is greater than entered time${key} `
+                    
+                }
 
-
-
+            }
         }
 
 
-
-        // for (let item of fields){
-        //     if (!item) {
-        //         formIsValid = false
-        //         errors["name"] = "cannot be empty"
-        //     }
-
-        // }
 
 
         setErrors(errors)
         return formIsValid
     }
-
-
     const buttonClick = () => {
         let copy = [...screenings]
         let dateInts = date.split("-").map((x) => { return parseInt(x) })
@@ -122,9 +136,7 @@ function AddScreening(props) {
             copy.push(newScreening)
             setScreenings(copy)
         }
-        else{
-            alert("Form has errors")
-        }
+
 
 
     }
@@ -132,14 +144,14 @@ function AddScreening(props) {
 
     return (
         <div className="dodaj_seans">
-            {titleInput}
-            <span style={{ color: "red" }}>{errors["title"]}</span>
-            {dateInput}
-            <span style={{ color: "red" }}>{errors["date"]}</span>
-            {timeInput}
-            <span style={{ color: "red" }}>{errors["time"]}</span>
-            {roomInput}
-            <span style={{ color: "red" }}>{errors["room"]}</span>
+            {"film: "}{titleInput}
+            <p style={{ color: "red" }}>{errors["title"]}</p>
+            {"data: "}{dateInput}
+            <p style={{ color: "red" }}>{errors["date"]}</p>
+            {"godzina: "}{timeInput}
+            <p style={{ color: "red" }}>{errors["time"]}</p>
+            {"nr. sali: "} {roomInput}
+            <p style={{ color: "red" }}>{errors["room"]}</p>
 
 
             <button onClick={buttonClick}>Dodaj seans</button>
