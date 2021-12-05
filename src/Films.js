@@ -10,7 +10,7 @@ function Films(props) {
                 <div key={idx}>
                     <Link class="link_films" to={`/film/${idx}`}>
                         {item.title}
-                    </Link> <span>({item.duration}) </span>
+                    </Link> <span>({item.duration}min) </span>
                     {/* <Screening screening={item} id={idx} /> */}
                 </div>
             )
