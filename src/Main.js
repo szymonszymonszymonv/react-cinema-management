@@ -6,6 +6,8 @@ import Film from './Film'
 import AddFilm from './AddFilm';
 import AddScreening from './AddScreening';
 import BuyTicket from './BuyTicket';
+import Films from './Films'
+import Screenings from './Screenings';
 import WyswietlSeans from './WyswietlSeans';
 import PropTypes from 'prop-types'
 
@@ -112,20 +114,22 @@ class Main extends Component {
         return ( 
             <div>
                 <p>SEANSE:</p>
-                <Link to={'/seans/add'}>  Add Screening </Link>
-                {this.displayScreenings()}
+                <Link to={'/seans/add'}>  Add Screening </Link> <p />
+                <Link to={'/seans/'}>  Lista Seansów </Link>
                 <p>FILMY:</p>
-                <Link to={`/film/add`}>  Add Film :) </Link>
-                {this.displayFilms()}
+                <Link to={'/films'}>  Lista Filmów </Link> <p />
+                <Link to={`/films/add`}>  Add Film :) </Link>
                 <Routes>
-                    {/* <Route path='/films' element={<Films onDeleteFilm={this.onDeleteFilm} films={movies} setFilms={this.setFilms} />}/> */}
-                    <Route path='/film/:id' element={<Film onDeleteFilm={this.onDeleteFilm} films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
-                    <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
-                    <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
-                    <Route path='/seans/:id/' element={<Screening rooms={rooms} films={movies} screenings={screenings} setScreenings={this.setScreenings}/>}>
-
+                    <Route path='films/*' element={<Films films={movies}  />}>
+                        <Route path='add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     </Route>
-                    <Route path='seans/:id/buy' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
+                    <Route path='seans/*' element={<Screenings films={movies} screenings={screenings}  />}>
+                        <Route path='add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
+                    </Route>
+                    <Route path='/film/:id' element={<Film onDeleteFilm={this.onDeleteFilm} films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
+                    <Route path='/seans/:id/' element={<Screening rooms={rooms} films={movies} screenings={screenings} setScreenings={this.setScreenings}/>}>
+                        <Route path='buy' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
+                    </Route>
 
                     {/* <Route path='/seans/:seanse' element={<WyswietlSeans sseanse={screenings} setSeanse={this.setScreenings}/>}/> */}
                 </Routes>

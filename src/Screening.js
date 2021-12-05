@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 
 import EditScreening from './EditScreening';
 import BuyTicket from './BuyTicket';
@@ -41,6 +41,7 @@ function Screening(props) {
 
             <p>KUP BILET:</p>
             <Link to={`buy`}>  Buy Ticket </Link>
+            <Outlet />
         </div>
     )
 }
