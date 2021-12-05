@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import EditScreening from './EditScreening';
 
 
@@ -21,7 +22,7 @@ function Screening(props) {
                 <p>{`tytuł: ${screening.film.title}`}</p>    
                 <p>{`data: ${screening.date.getFullYear()}.${screening.date.getMonth() + 1}.${screening.date.getDate()}`} </p>   
                 <p>{`godzina: ${screening.time}`}</p>    
-                <p>{`sala: ${Object.values(screening.room)[0]}`}</p> 
+                <p>{`sala: ${Object.values(screening.room)[0]}`}</p>
                 <p>{`sprzedane bilety: ${screening.soldTickets}`}</p>    
                 <p>{`dostępne bilety: ${screening.availableTickets}`} </p>   
                 <p>{`zajęte miejsca: ${screening.takenSeats}`}</p>    

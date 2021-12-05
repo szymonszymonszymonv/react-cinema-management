@@ -4,7 +4,7 @@ import Screening from './Screening';
 import Film from './Film'
 import AddFilm from './AddFilm';
 import AddScreening from './AddScreening';
-
+import BuyTicket from './BuyTicket';
 
 class Main extends Component {
     constructor(props) {
@@ -141,10 +141,12 @@ class Main extends Component {
     render() { 
         
         let screenings = this.state.screenings
-        let movies = this.state.movies
+        let movies = this.state.movies//
         let rooms = this.state.rooms
         return ( 
             <div>
+                <p>KUP BILET:</p>
+                <Link to={'/buyTicket'}>  Buy Ticket </Link>
                 <p>SEANSE:</p>
                 <Link to={'/seans/add'}>  Add Screening </Link>
                 {this.displayScreenings()}
@@ -156,6 +158,8 @@ class Main extends Component {
                     <Route path='/film/:id' element={<Film films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/film/add' element={<AddFilm films={movies} setFilms={this.setFilms} />}/>
                     <Route path='/seans/add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
+                    <Route path='/buyTicket' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
+
                 </Routes>
             </div>
             );

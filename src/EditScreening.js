@@ -12,10 +12,10 @@ function EditScreening(props) {
     const { idx , screenings, setScreenings} = props
     const [title, titleInput] = useInput("text", "title", "Tytuł")
     const [date, dateInput] = useInput("date", "date")
-    const [time, timeInput] = useInput("text", "time", "godzina")
+    const [time, timeInput] = useInput("text", "time", "godzina") //godzina 16 time=16
     const [room, roomInput] = useInput("number", "room", "sala")
     const [soldTickets, soldTicketsInput] = useInput("number", "soldTickets", "ilość sprzedanych biletów")
-    const [avaTickets, avaTicketsInput] = useInput("number", "avaTickets", "ilość dostępnych biletów")
+    const [availableTickets, availableTicketsInput] = useInput("number", "availableTickets", "ilość dostępnych biletów")
     const [takenSeats, takenSeatsInput] = useInput("text", "takenSeats", "zajęte miejsca")
     const [screeningList, setScreeningList] = useState(screenings)
 
@@ -25,11 +25,11 @@ function EditScreening(props) {
         copy[idx].film.title = title
         let dateInts = date.split("-").map((x) => {return parseInt(x)})
         dateInts[1] -= 1
-        copy[idx].date = new Date(...dateInts)
+        copy[idx].date = new Date(...dateInts) 
         copy[idx].time = time
         copy[idx].room = room
         copy[idx].soldTickets = soldTickets
-        copy[idx].avaTickets = avaTickets
+        copy[idx].availableTickets = availableTickets
         copy[idx].takenSeats = takenSeats.split(", ")
         
         setScreeningList(copy)
@@ -43,7 +43,7 @@ function EditScreening(props) {
             {timeInput}
             {roomInput}
             {soldTicketsInput}
-            {avaTicketsInput}
+            {availableTicketsInput}
             {takenSeatsInput}
 
             <button onClick={buttonClick}>Edytuj</button>
