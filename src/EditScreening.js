@@ -104,7 +104,6 @@ function EditScreening(props) {
             
 
             <button onClick={buttonClick}>Edytuj</button>
-
         </div>
     )
 }

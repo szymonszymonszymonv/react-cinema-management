@@ -9,9 +9,9 @@ function Screenings(props) {
         let screeningsView = screenings.map((item, idx) => {
             return (
                 <div key={idx}>
-                    <Link class="screenings" to={`/film/${films.indexOf(item.film)}`}>{item.film.title}</Link> <span>({item.film.duration}) </span>
+                    <Link class="screenings" to={`/film/${films.indexOf(item.film)}`}>{item.film.title}<span>({item.film.duration}min)</span></Link> 
                     <Link class="screenings_time" to={`${idx}`}>
-                        {item.time}
+                    data: {item.date.getDay()}.{item.date.getMonth()+1}.{item.date.getFullYear()}  godz.: {item.time}
                     </Link>
                 </div>
             )
