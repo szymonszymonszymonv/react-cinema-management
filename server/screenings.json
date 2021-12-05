@@ -1,1 +1,64 @@
-{"screenings":[{"id":"2","film":"2","date":[2021,11,2],"time":"23:00","room":"3","soldTickets":4,"availableTickets":30,"takenSeats":[1,2,3,4]},{"id":"3","film":"3","date":[2021,11,1],"time":"16:00","room":"1","soldTickets":1,"availableTickets":33,"takenSeats":[5]},{"id":"4","film":"3","date":[2021,11,2],"time":"12:00","room":"5","soldTickets":3,"availableTickets":15,"takenSeats":[5,10,11]}]}
+{
+  "screenings": [
+    {
+      "id": "0",
+      "film": "1",
+      "date": [2021, 11, 1],
+      "time": "18:00",
+      "room": "1",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "1",
+      "film": "1",
+      "date": [2021, 11, 2],
+      "time": "20:00",
+      "room": "2",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "2",
+      "film": "2",
+      "date": [2021, 11, 2],
+      "time": "23:00",
+      "room": "3",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "3",
+      "film": "3",
+      "date": [2021, 11, 1],
+      "time": "16:00",
+      "room": "1",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "4",
+      "film": "3",
+      "date": [2021, 11, 2],
+      "time": "12:00",
+      "room": "5",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "f6f7aa01-a639-4962-b413-3a6a55b86693",
+      "film": "fb066351-4aa1-4476-8419-85cc36637236",
+      "date": "2021-12-05T23:00:00.000Z",
+      "time": "18:50",
+      "room": 2,
+      "soldTickets": "",
+      "availableTickets": "",
+      "takenSeats": ""
+    }
+  ]
+}
