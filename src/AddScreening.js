@@ -105,6 +105,7 @@ function AddScreening(props) {
 
 AddScreening.propTypes = {
     films: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
         title: PropTypes.string,
         duration: PropTypes.string,
         description: PropTypes.string,
@@ -117,10 +118,11 @@ AddScreening.propTypes = {
             description: PropTypes.string,
             cast: PropTypes.string
         }).isRequired,
+        id: PropTypes.string,
         date: PropTypes.date,
         time: PropTypes.string,
         room: PropTypes.shape({
-            nr: PropTypes.number,
+            nr: PropTypes.string,
             capacity: PropTypes.number,
             howManyTaken: PropTypes.number
         }).isRequired,
@@ -129,7 +131,7 @@ AddScreening.propTypes = {
         takenSeats: PropTypes.arrayOf(PropTypes.number)
     })).isRequired,
     rooms: PropTypes.arrayOf(PropTypes.shape({
-        nr: PropTypes.number,
+        nr: PropTypes.string,
         capacity: PropTypes.number,
         howManyTaken: PropTypes.number
     })).isRequired,
