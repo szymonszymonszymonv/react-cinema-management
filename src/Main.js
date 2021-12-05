@@ -125,13 +125,15 @@ class Main extends Component {
                     </Route>
                     <Route path='seans/*' element={<Screenings films={movies} screenings={screenings}  />}>
                         <Route path='add' element={<AddScreening films={movies} rooms={rooms} screenings={screenings} setScreenings={this.setScreenings} />}/>
+                        <Route path='' element={<WyswietlSeans screenings={screenings} setSeanse={this.setScreenings}/>}/>
+
                     </Route>
                     <Route path='/film/:id' element={<Film onDeleteFilm={this.onDeleteFilm} films={movies} screenings={screenings} setFilms={this.setFilms} />}/>
                     <Route path='/seans/:id/' element={<Screening rooms={rooms} films={movies} screenings={screenings} setScreenings={this.setScreenings}/>}>
                         <Route path='buy' element={<BuyTicket screenings={screenings}  setScreenings={this.setScreenings}></BuyTicket>}/>
                     </Route>
 
-                    {/* <Route path='/seans/:seanse' element={<WyswietlSeans sseanse={screenings} setSeanse={this.setScreenings}/>}/> */}
+                    {/* <Route path='/seans/' element={<WyswietlSeans screenings={screenings} setSeanse={this.setScreenings}/>}/> */}
                 </Routes>
                 {/* <WyswietlSeans  screenings = {screenings} ></WyswietlSeans> */}
             </div>

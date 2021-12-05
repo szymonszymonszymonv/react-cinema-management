@@ -23,6 +23,7 @@ function Screenings(props) {
         <div>
             {displayScreenings()}
             <Outlet />
+            {/* <Outlet /> */}
         </div>
     )
 }
