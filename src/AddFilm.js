@@ -48,6 +48,7 @@ function AddFilm(props){
 
 AddFilm.propTypes = {
     films: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
         title: PropTypes.string,
         duration: PropTypes.string,
         description: PropTypes.string,

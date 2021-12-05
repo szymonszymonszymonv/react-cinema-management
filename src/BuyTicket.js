@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 function BuyTicket(props) {
     
@@ -64,6 +65,32 @@ function BuyTicket(props) {
 
     )
 }
+
+
+BuyTicket.propTypes = {
+    setScreenings: PropTypes.func.isRequired,
+    screenings: PropTypes.arrayOf(PropTypes.shape({
+        film: PropTypes.shape({
+            id: PropTypes.string,
+            title: PropTypes.string,
+            duration: PropTypes.string,
+            description: PropTypes.string,
+            cast: PropTypes.string
+        }).isRequired,
+        id: PropTypes.string,
+        date: PropTypes.date,
+        time: PropTypes.string,
+        room: PropTypes.shape({
+            nr: PropTypes.string,
+            capacity: PropTypes.number,
+            howManyTaken: PropTypes.number
+        }).isRequired,
+        soldTickets: PropTypes.number,
+        availableTickets: PropTypes.number,
+        takenSeats: PropTypes.arrayOf(PropTypes.number)
+    }).isRequired)
+}
+
 export default BuyTicket
 
 

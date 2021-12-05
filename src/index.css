@@ -5,9 +5,163 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(42, 42, 119);
+  background: 
+  url('../src/kino8.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  width: auto;
+  height: auto;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.menu{
+  /* background-color: rgb(214, 135, 61); */
+  opacity: 90%;
+  background-image: linear-gradient(
+    to right,
+    #f07362 0%,
+    #e9a454 51%,
+    #e67447 100%
+  );
+  width: 100%;
+  height: 80px;
+}
+.tlo{
+  opacity: 90%;
+  background-image: linear-gradient(
+    to right,
+    #f07362 0%,
+    #e9a454 51%,
+    #e67447 100%
+  );
+  color: rgb(254, 255, 254);
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0px;
+  font-size: 130%;
+  font-family: 'Roboto';
+  font-weight: 400;
+
+
+
+}
+
+
+.seanse {
+  font-family: 'Roboto';
+  font-size: 300%;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  margin-left: 150px;
+  margin-right: 5px;
+  width: 10em
+}
+
+.seans_add{
+  font-family: 'Roboto';
+  font-size: 150%;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 20px;
+  color:rgb(255, 255, 255);
+}
+.lista_seans{
+  font-family: 'Roboto';
+  font-size: 150%;
+  font-weight: 700;
+  color:rgb(247, 247, 247);
+}
+
+.filmy{
+  font-family: 'Roboto';
+  font-size: 300%;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  margin-left: 300px;
+  margin-right: 5px;
+  width: 10em
+}
+
+.listaFilm{
+  font-family: 'Roboto';
+  font-size: 150%;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 20px;
+  color:rgb(255, 255, 255);
+}
+
+.add_film{
+  font-family: 'Roboto';
+  font-size: 150%;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 20px;
+  color:rgb(255, 255, 255);
+}
+
+.films{
+  color: #ffffff;
+  font-size: 120%;
+  font-family: 'Roboto';
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10em;
+  margin-bottom: 100px;
+
+}
+
+.link_films{
+  color: #ffffff;
+  font-size: 120%;
+  font-family: 'Roboto';
+  font-weight: 400;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10em;
+  margin-bottom: 100px;
+}
+
+.screenings{
+  color: #ffffff;
+  font-size: 150%;
+  font-family: 'Roboto';
+  font-weight: 500;
+  margin-left: 800px;
+  margin-right: 0px;
+  width: 10em;
+  margin-bottom: 100px;
+  margin-bottom: 100px;
+}
+
+.screenings_time{
+  color: #ffe602;
+  font-size: 125%;
+  font-family: 'Roboto';
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10em;
+  margin-bottom: 100px;
+}
+
+.seans_data{
+  margin-left: auto;
+  margin-right: auto;
+  width: 10em;
+  margin-top: 20px;
+}
+
+.dodaj_seans{
+  margin-left: auto;
+  margin-right: auto;
+  width: 10em;
+  margin-top: 20px;
 }

@@ -33,15 +33,16 @@ function DeleteFilm (props){
       
 }
 
-// DeleteFilm.propTypes = {
-//     listaFilmow: PropTypes.arrayOf(PropTypes.shape({
-//         title: PropTypes.string,
-//         duration: PropTypes.string,
-//         description: PropTypes.string,
-//         cast: PropTypes.string
-//     })).isRequired,
-//     idx: PropTypes.number.isRequired,
-//     deleteFilm: PropTypes.func.isRequired
-// }
+DeleteFilm.propTypes = {
+    listaFilmow: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        duration: PropTypes.string,
+        description: PropTypes.string,
+        cast: PropTypes.string
+    })).isRequired,
+    idx: PropTypes.string.isRequired,
+    deleteFilm: PropTypes.func.isRequired
+}
  
 export default DeleteFilm;
