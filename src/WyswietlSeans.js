@@ -32,7 +32,7 @@ function WyswietlSeans(props) {
 
     function WypiszTablice() {
         let tablica = wypisac.map((item, idx) => {
-            return <p key={idx}> tytuł: {item.film.title} / data: {item.date.toString()} /
+            return <p key={idx}> tytuł: {item.film.title} / data: {item.date.getDate()}.{item.date.getMonth()+1}.{item.date.getFullYear()} {item.time} /
                 pokój: {item.room.nr} / sprzedane bilety: {item.soldTickets} </p>
         });
         return tablica;
