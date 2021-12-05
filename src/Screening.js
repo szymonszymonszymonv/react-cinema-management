@@ -37,7 +37,7 @@ function Screening(props) {
         
         <div>
             {displayScreening()}
-            <EditScreening films={films} screenings={screenings} idx={idx} setScreenings={setScreenings}></EditScreening>
+            <EditScreening films={films} screenings={screenings} idx={idx} setScreenings={setScreenings} rooms={rooms}></EditScreening>
 
             <p>KUP BILET:</p>
             <Link to={`buy`}>  Buy Ticket </Link>

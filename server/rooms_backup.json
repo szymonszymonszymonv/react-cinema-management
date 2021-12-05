@@ -2,28 +2,23 @@
     "rooms": [
         {
             "nr": 1,
-            "capacity": 20,
-            "howManyTaken": 0
+            "capacity": 20
         },
         {
             "nr": 2,
-            "capacity": 20,
-            "howManyTaken": 0
+            "capacity": 20
         },
         {
             "nr": 3,
-            "capacity": 20,
-            "howManyTaken": 0
+            "capacity": 20
         },
         {
             "nr": 4,
-            "capacity": 20,
-            "howManyTaken": 0
+            "capacity": 20
         },
         {
             "nr": 5,
-            "capacity": 20,
-            "howManyTaken": 0
+            "capacity": 20
         }
     ]
 }

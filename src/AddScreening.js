@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
@@ -23,7 +23,7 @@ function AddScreening(props) {
                     }
                 </select>
 
-                return [value, input]
+                return [value, input, setValue]
             }
             else {
                 const input = <select type={type} id={id} placeholder={placeholder} onChange={e => { setValue(rooms.find(o => o.nr == e.target.value)) }}>
@@ -40,19 +40,54 @@ function AddScreening(props) {
                     }
                 </select>
 
-                return [value, input]
+                return [value, input, setValue]
             }
         }
     }
 
     const { films, rooms, screenings, setScreenings } = props
-    const [title, titleInput] = useInput("select", "title")
+    const [title, titleInput, setTitle] = useInput("select", "title")
     const [date, dateInput] = useInput("date", "date")
     const [time, timeInput] = useInput("time", "time", "Add time")
-    const [room, roomInput] = useInput("select", "room")
-    const [soldTickets, soldTicketsInput] = useInput("text", "soldTickets", "Add the number of  sold tickets")
-    const [availableTickets, availableTicketsInput] = useInput("number", "availableTickets", "Add the number of available tickets")
-    const [takenSeats, takenSeatsInput] = useInput("text", "takenSeats", "Add list of taken seats: e.g (1 ,2 ,3 ,4 ,5 )")
+    const [room, roomInput, setRoom] = useInput("select", "room")
+
+    useEffect(() => {
+        setTitle(films[0])
+        setRoom(rooms[0])
+    }, [])
+
+
+    const [errors, setErrors] = useState({})
+    let fields = { title: title, date: date, time: time, room: room }
+
+    function handleValidation() {
+        let errors = {}
+        let formIsValid = true
+
+        for (const [key, value] of Object.entries(fields)) {
+            if (!value) {
+                formIsValid = false
+                errors[key] = `${key} cannot be empty`
+            }
+
+
+
+        }
+
+
+
+        // for (let item of fields){
+        //     if (!item) {
+        //         formIsValid = false
+        //         errors["name"] = "cannot be empty"
+        //     }
+
+        // }
+
+
+        setErrors(errors)
+        return formIsValid
+    }
 
 
     const buttonClick = () => {
@@ -66,9 +101,9 @@ function AddScreening(props) {
             date: new Date(...dateInts),
             time: time,
             room: room,
-            soldTickets: soldTickets,
-            availableTickets: availableTickets,
-            takenSeats: takenSeats.split(", "),
+            soldTickets: 0,
+            availableTickets: room.capacity,
+            takenSeats: [],
         }
         let screeningJson = {
             id: randId,
@@ -76,27 +111,38 @@ function AddScreening(props) {
             date: new Date(...dateInts),
             time: time,
             room: room.nr,
-            soldTickets: soldTickets,
-            availableTickets: availableTickets,
-            takenSeats: takenSeats
+            soldTickets: 0,
+            availableTickets: room.capacity,
+            takenSeats: []
         }
 
-        axios.post("http://localhost:7777/screenings", {screening: screeningJson})
-        .then(res => { console.log(res) })
-        copy.push(newScreening)
-        setScreenings(copy)
+        if (handleValidation()) {
+            axios.post("http://localhost:7777/screenings", { screening: screeningJson })
+                .then(res => { console.log(res) })
+            copy.push(newScreening)
+            setScreenings(copy)
+        }
+        else{
+            alert("Form has errors")
+        }
+
+
     }
 
 
     return (
         <div>
+            
             {titleInput}
+            <span style={{ color: "red" }}>{errors["title"]}</span>
             {dateInput}
+            <span style={{ color: "red" }}>{errors["date"]}</span>
             {timeInput}
+            <span style={{ color: "red" }}>{errors["time"]}</span>
             {roomInput}
-            {soldTicketsInput}
-            {availableTicketsInput}
-            {takenSeatsInput}
+            <span style={{ color: "red" }}>{errors["room"]}</span>
+
+
             <button onClick={buttonClick}>Dodaj seans</button>
         </div>
 

@@ -1,53 +1,91 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Screening from './Screening';
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
 function EditScreening(props) {
-    
-    const useInput = (type, id, placeholder="") => {
+
+    const useInput = (type, id, placeholder = "") => {
         const [value, setValue] = useState("")
-        const input = <input type={type} id={id} placeholder={placeholder} onChange={e => {setValue(e.target.value)}}  />
-        return [value, input]
+        if (type !== "select") {
+            const input = < input type={type} id={id} placeholder={placeholder} onChange={e => { setValue(e.target.value) }} />
+            return [value, input]
+        }
+        else {
+            if (id === "title") {
+                const input = <select type={type} id={id} placeholder={placeholder} onChange={e => { setValue(films.find(o => o.title === e.target.value)) }}>
+                    {
+                        films.map((item, key) => {
+                            return (
+                                <option value={item.title} key={key}>
+                                    {item.title}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+
+                return [value, input, setValue]
+            }
+            else {
+                const input = <select type={type} id={id} placeholder={placeholder} onChange={e => { setValue(rooms.find(o => o.nr == e.target.value)) }}>
+                    {
+                        rooms.map((item, key) => {
+                            return (
+                                <option value={item.nr} key={key}>
+                                    {item.nr}
+                                </option>
+
+                            )
+
+                        })
+                    }
+                </select>
+
+                return [value, input, setValue]
+            }
+        }
     }
-    
+
     const { idx, screenings, setScreenings, films, rooms } = props
+    const [title, titleInput, setTitle] = useInput("select", "title")
     const [date, dateInput] = useInput("date", "date")
     const [time, timeInput] = useInput("time", "time", "godzina") //godzina 16 time=16
-    const [room, roomInput] = useInput("number", "room", "sala")
-    const [soldTickets, soldTicketsInput] = useInput("number", "soldTickets", "ilość sprzedanych biletów")
-    const [avaTickets, availableTicketsInput] = useInput("number", "availableTickets", "ilość dostępnych biletów")
-    const [takenSeats, takenSeatsInput] = useInput("text", "takenSeats", "zajęte miejsca")
+    const [room, roomInput, setRoom] = useInput("select", "room", "sala")
     const [film, setFilm] = useState(films[0])
     const [screeningList, setScreeningList] = useState(screenings)
 
+    useEffect(() => {
+        setTitle(films[0])
+        setRoom(rooms[0])
+    }, [])
+
+
     const putScreening = (screening) => {
-        axios.put("http://localhost:7777/screenings", {screening: screening})
-        .then(res => { console.log(res) })
+        axios.put("http://localhost:7777/screenings", { screening: screening })
+            .then(res => { console.log(res) })
     }
 
     const buttonClick = () => {
         let copy = [...screeningList]
 
         copy[idx].film = film
-        let dateInts = date.split("-").map((x) => {return parseInt(x)})
+        let dateInts = date.split("-").map((x) => { return parseInt(x) })
         dateInts[1] -= 1
-        copy[idx].date = new Date(...dateInts) 
+        copy[idx].title = title
+        copy[idx].date = new Date(...dateInts)
         copy[idx].time = time
         copy[idx].room = room
-        copy[idx].soldTickets = soldTickets
-        copy[idx].availableTickets = avaTickets
-        copy[idx].takenSeats = takenSeats.split(", ")
 
         let screeningJson = {
             id: copy[idx].id,
-            film: film.id,
+            film: title.id,
             date: dateInts,
             time: time,
-            room: room, // FIXME: room.nr, select room
-            soldTickets: soldTickets,
-            availableTickets: avaTickets,
-            takenSeats: takenSeats
+            room: room.nr, 
+            soldTickets: copy[idx].soldTickets,
+            availableTickets: copy[idx].availableTickets,
+            takenSeats: copy[idx].takenSeats
         }
 
         putScreening(screeningJson)
@@ -59,27 +97,14 @@ function EditScreening(props) {
 
     return (
         <div>
-            <select id={"id"} onChange={e => { setFilm(films.find(film => film.title === e.target.value)) }}>
-                {
-                    films.map((item, key) => {
-                        return (
-                            <option value={item.title} key={key}>
-                                {item.title}
-                            </option>
-                        )
-                    })
-                }
-            </select>
-
+            {titleInput}
             {dateInput}
             {timeInput}
             {roomInput}
-            {soldTicketsInput}
-            {availableTicketsInput}
-            {takenSeatsInput}
+            
 
             <button onClick={buttonClick}>Edytuj</button>
-            
+
         </div>
     )
 }
