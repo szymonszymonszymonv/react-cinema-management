@@ -31,7 +31,7 @@ function WyswietlSeans(props) {
     }
 
     return (
-        <div>
+        <div class="seans_data">
 
             {input}
             {WypiszTablice()}
