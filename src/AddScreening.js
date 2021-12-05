@@ -89,7 +89,7 @@ function AddScreening(props) {
 
 
     return (
-        <div>
+        <div className="dodaj_seans">
             {titleInput}
             {dateInput}
             {timeInput}
@@ -99,7 +99,6 @@ function AddScreening(props) {
             {takenSeatsInput}
             <button onClick={buttonClick}>Dodaj seans</button>
         </div>
-
     )
 }
 
