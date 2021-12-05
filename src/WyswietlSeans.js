@@ -21,11 +21,9 @@ function WyswietlSeans(props) {
 
     timeInts = time.split(":").map((x) => { return parseInt(x) })
 
-
-
     for (let i = 0; i < screenings.length; i++) {
         let timeInt = screenings[i].time.split(":").map((x) => { return parseInt(x) })
-        if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0] && timeInt[1] >= timeInts[1]) {
+        if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0]) {
             wypisac.push(screenings[i])
         }
     }
@@ -40,7 +38,7 @@ function WyswietlSeans(props) {
 
     return (
         <div class="seans_data">
-
+            <p> Wyświetl seans w danym dniu: </p>
             {input}
             {inputTime}
             {WypiszTablice()}

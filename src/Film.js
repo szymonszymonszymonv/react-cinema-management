@@ -105,7 +105,7 @@ function Film(props) {
               </p>{" "}
               <p>
                 {" "}
-                {"Czas trwania: "} {listaFilmow[idx].duration}{" "}
+                {"Czas trwania: "} {listaFilmow[idx].duration}{"min "}
               </p>{" "}
               <p>
                 {" "}
