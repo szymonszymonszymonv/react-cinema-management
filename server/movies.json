@@ -1,1 +1,25 @@
-{"movies":[{"id":"2","title":"diuna","duration":"160","description":"llkll","cast":"Daria"},{"id":"3","title":"licorice pizza","duration":"130","description":"mmmmmm","cast":"Czarek"},{"id":"fb066351-4aa1-4476-8419-85cc36637236","title":"","duration":" ","description":" ","cast":" "},{"id":"e0d271bc-ac71-42d3-9f5e-d4cf402bfad5","title":"nowy tytul","duration":"120","description":"kdkjsnkjS","cast":"JNJKDSA"}]}
+{
+    "movies": [
+        {
+            "id": "2",
+            "title": "diuna",
+            "duration": "160",
+            "description": "llkll",
+            "cast": "Daria"
+        },
+        {
+            "id": "3",
+            "title": "licorice pizza",
+            "duration": "130",
+            "description": "mmmmmm",
+            "cast": "Czarek"
+        },
+        {
+            "id": "e0d271bc-ac71-42d3-9f5e-d4cf402bfad5",
+            "title": "nowy tytul",
+            "duration": "120",
+            "description": "kdkjsnkjS",
+            "cast": "JNJKDSA"
+        }
+    ]
+}

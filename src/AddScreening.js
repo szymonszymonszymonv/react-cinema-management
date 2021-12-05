@@ -58,11 +58,12 @@ function AddScreening(props) {
 
     let today = new Date();
 
-    // let currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     let currentDate = today.getTime()
     currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
     let currentHour = today.getHours() + ":" + today.getMinutes();
     
+    
+
     const [errors, setErrors] = useState({})
     let fields = { title: title, date: date, time: time, room: room }
 
@@ -74,7 +75,8 @@ function AddScreening(props) {
 
         let inputDate = new Date(...dateInts)
         inputDate = inputDate.getTime()
-        
+        console.log(currentDate)
+        console.log(inputDate)
         
         for (const [key, value] of Object.entries(fields)) {
             if (!value) {
@@ -84,14 +86,20 @@ function AddScreening(props) {
             else if (value === date) {
                 if (inputDate < currentDate) {
                     formIsValid = false
-                    errors[key] = `current date is greater than entered time${key} `
+                    errors[key] = `current date is greater than entered time ${key} `
                     
                 }
             }
             else if (value === time) {
-                if (inputDate == currentDate.getTime() && value < currentHour) { // The ==, !=, ===, and !== operators require you to use date.getTime() as in
+                let time1 = value.split(':')
+                let totalSeconds1 = parseInt(time1[0] * 3600 + time1[1] * 60)
+                
+                let time2 = currentHour.split(':')
+                let totalSeconds2 = parseInt(time2[0] * 3600 + time2[1] * 60)
+                
+                if (inputDate === currentDate.getTime() && totalSeconds1 < totalSeconds2) { // The ==, !=, ===, and !== operators require you to use date.getTime()
                     formIsValid = false
-                    errors[key] = `current date and time  is greater than entered time${key} `
+                    errors[key] = `current  time  is greater than entered date and ${key} `
                     
                 }
 
