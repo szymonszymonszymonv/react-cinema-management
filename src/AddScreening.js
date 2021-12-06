@@ -75,19 +75,21 @@ function AddScreening(props) {
 
         let inputDate = new Date(...dateInts)
         inputDate = inputDate.getTime()
-        console.log(currentDate)
-        console.log(inputDate)
+
         
         for (const [key, value] of Object.entries(fields)) {
             if (!value) {
                 formIsValid = false
                 errors[key] = `${key} cannot be empty`
+                setErrors(errors)
+                return formIsValid
             }
             else if (value === date) {
                 if (inputDate < currentDate) {
                     formIsValid = false
                     errors[key] = `current date is greater than entered time ${key} `
-                    
+                    setErrors(errors)
+                    return formIsValid
                 }
             }
             else if (value === time) {
@@ -100,18 +102,15 @@ function AddScreening(props) {
                 if (inputDate === currentDate.getTime() && totalSeconds1 < totalSeconds2) { // The ==, !=, ===, and !== operators require you to use date.getTime()
                     formIsValid = false
                     errors[key] = `current  time  is greater than entered date and ${key} `
-                    
+                    setErrors(errors)
+                    return formIsValid
                 }
-
             }
         }
-
-
-
-
         setErrors(errors)
         return formIsValid
     }
+
     const buttonClick = () => {
         let copy = [...screenings]
         let dateInts = date.split("-").map((x) => { return parseInt(x) })

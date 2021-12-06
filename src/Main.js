@@ -42,17 +42,13 @@ class Main extends Component {
                   screening.film = movies.find( (item) => {
                       return item.id === filmId
                   })
-
               }
-      
               this.setState({
                   movies: movies,
                   rooms: rooms,
                   screenings: screenings
               })
-        })  
-        
-        
+        })     
     }
 
     setScreenings = (screenings) => {

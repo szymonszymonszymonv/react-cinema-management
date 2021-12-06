@@ -82,11 +82,15 @@ function EditScreening(props) {
             if (!value) {
                 formIsValid = false
                 errors[key] = `${key} cannot be empty`
+                setErrors(errors)
+                return formIsValid
             }
             else if (value === date) {
                 if (inputDate < currentDate) {
                     formIsValid = false
                     errors[key] = `current date is greater than entered time ${key} `
+                    setErrors(errors)
+                    return formIsValid
                 }
             }
             else if (value === time) {
@@ -98,7 +102,9 @@ function EditScreening(props) {
                 
                 if (inputDate === currentDate.getTime() && totalSeconds1 < totalSeconds2) { // The ==, !=, ===, and !== operators require you to use date.getTime()
                     formIsValid = false
-                    errors[key] = `current  time  is greater than entered date and ${key} `    
+                    errors[key] = `current  time  is greater than entered date and ${key} `  
+                    setErrors(errors)
+                    return formIsValid
                 }
             }
         }
