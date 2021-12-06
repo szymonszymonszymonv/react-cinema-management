@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 function BuyTicket(props) {
     
@@ -24,6 +25,11 @@ function BuyTicket(props) {
         setChosenSeat(Object.values(seatObject).indexOf("free") + 1)
         console.log("IM IN USE EFFECT")
     }, [])  // działa jak componentDidMount
+
+    const putScreening = (screening) => {
+        axios.put("http://localhost:7777/screenings", { screening: screening })
+            .then(res => { console.log(res) })
+    }
  
     const buttonClick = () => {
         let copy = [...screenings]
@@ -35,10 +41,13 @@ function BuyTicket(props) {
         copy[idx].soldTickets++
         copy[idx].takenSeats.push(parseInt(chosenSeat))
 
+        putScreening(copy[idx])
+
         let next = Object.values(seatObject).indexOf("free") + 1
         setChosenSeat(next)
-
         setScreenings(copy)
+
+
 
     }
 

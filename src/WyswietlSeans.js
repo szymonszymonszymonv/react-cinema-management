@@ -24,13 +24,17 @@ function WyswietlSeans(props) {
     for (let i = 0; i < screenings.length; i++) {
         let timeInt = screenings[i].time.split(":").map((x) => { return parseInt(x) })
         if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0]) {
+            if(timeInt[0] === timeInts[0] && timeInt[1] < timeInts[1]){
+                continue
+            }
             wypisac.push(screenings[i])
         }
     }
+    
 
     function WypiszTablice() {
         let tablica = wypisac.map((item, idx) => {
-            return <p key={idx}> tytuł: {item.film.title} / data: {item.date.toString()} /
+            return <p key={idx}> tytuł: {item.film.title} / data: {item.date.getDate()}.{item.date.getMonth()+1}.{item.date.getFullYear()} {item.time} /
                 pokój: {item.room.nr} / sprzedane bilety: {item.soldTickets} </p>
         });
         return tablica;

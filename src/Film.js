@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteFilm from "./DeleteFilm";
 import FilmPopularity from "./FilmPopularity";
 import { useParams, useNavigate } from "react-router";
@@ -15,8 +15,14 @@ function Film(props) {
   const [duration, setDuration] = useState("");
   const [listaFilmow, setListaFilmow] = useState(films);
   const [cast, setCast] = useState("");
-
   const [errors, setErrors] = useState({})
+
+  useEffect(() => {
+    setTitle(listaFilmow[idx].title)
+    setDescription(listaFilmow[idx].description)
+    setCast(listaFilmow[idx].cast)
+    setDuration(listaFilmow[idx].duration)
+  }, [])
 
   function handleValidation() {
     let errors = {}
@@ -150,6 +156,7 @@ function Film(props) {
   };
 
 
+
   return (
     <div>
       <div >
@@ -166,28 +173,18 @@ function Film(props) {
           {"Obsada: "} {listaFilmow[idx].cast}
         </p>
       </div>
-      <input type="text" placeholder="Edytuj tytuł" onChange={onChange} />
 
+      Tytuł: <input type="text" value={title} onChange={onChange} />
       <p style={{ color: "red" }}>{errors["title"]}</p>
-      <input
-        type="text"
-        placeholder="Edytuj opis"
-        onChange={onChangenDescription}
-      />
+      Opis: <input type="text" value={description} onChange={onChangenDescription} />
       <p style={{ color: "red" }}>{errors["description"]}</p>
-      <input
-        type="text"
-        placeholder="Edytuj czas trwania filmu"
-        onChange={onChangeDuration}
-      />
+      Długość: <input type="text" value={duration} onChange={onChangeDuration} />
       <p style={{ color: "red" }}>{errors["duration"]}</p>
-      <input
-        type="text"
-        placeholder="Edytuj obsadę filmu"
-        onChange={onChangenCast}
-      />
+      Obsada: <input type="text" value={cast} onChange={onChangenCast} />
       <p style={{ color: "red" }}>{errors["cast"]}</p>
-      <button onClick={buttonClick}> Edytuj </button> <p> </p>
+
+      <button onClick={buttonClick}> Edytuj</button> <p> </p>
+
       <DeleteFilm
         deleteFilm={deleteFilm}
         listaFilmow={listaFilmow}
