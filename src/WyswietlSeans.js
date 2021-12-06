@@ -3,34 +3,37 @@ import PropTypes from 'prop-types'
 
 function WyswietlSeans(props) {
     const { screenings } = props
-    const [date, setDate] = useState(" ");
-    const [time, setTime] = useState(" ");
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
 
     const input = <input type="date" onChange={e => { setDate(e.target.value) }} />
     const inputTime = <input type="time" onChange={e => { setTime(e.target.value) }} />
     
-
-    let dateInts = []
-    let timeInts = []
+    let dateInts = [] // [2020, 11, 1]
+    let timeInts = [] // [12, 30]
     let wypisac = []
     let zmienna;
 
+    // date = "2020-12-1"
     dateInts = date.split("-").map((x) => { return parseInt(x) })
     dateInts[1] -= 1
-    zmienna = new Date(...dateInts)
+    zmienna = new Date([...dateInts])
 
     timeInts = time.split(":").map((x) => { return parseInt(x) })
 
     for (let i = 0; i < screenings.length; i++) {
         let timeInt = screenings[i].time.split(":").map((x) => { return parseInt(x) })
-        if (zmienna.getDate() === screenings[i].date.getDate() && timeInt[0] >= timeInts[0]) {
+
+        if (zmienna.getDate() === screenings[i].date.getDate() 
+            && zmienna.getMonth() + 1 === screenings[i].date.getMonth() 
+            && zmienna.getFullYear() === screenings[i].date.getFullYear()
+            && timeInt[0] >= timeInts[0]) {
             if(timeInt[0] === timeInts[0] && timeInt[1] < timeInts[1]){
                 continue
             }
             wypisac.push(screenings[i])
         }
     }
-    
 
     function WypiszTablice() {
         let tablica = wypisac.map((item, idx) => {
@@ -63,13 +66,11 @@ WyswietlSeans.propTypes = {
             cast: PropTypes.string
         }).isRequired,
         id: PropTypes.string,
-
         date: PropTypes.date,
         time: PropTypes.string,
         room: PropTypes.shape({
             nr: PropTypes.string,
             capacity: PropTypes.number,
-            howManyTaken: PropTypes.number
         }).isRequired,
         soldTickets: PropTypes.number,
         availableTickets: PropTypes.number,

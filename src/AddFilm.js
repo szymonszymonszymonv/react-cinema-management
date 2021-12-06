@@ -9,12 +9,10 @@ function AddFilm(props) {
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState("");
     const [cast, setCast] = useState("");
-    //const [listaFilmowAdd, setListaFilmow] = useState(films);
     const input = <input type={"text"} placeholder={"Wpisz tytuł"} onChange={e => { setTitle(e.target.value) }} />
     const input2 = <input type={"text"} placeholder={"Wprowadź opis"} onChange={e => { setDescription(e.target.value) }} />
     const input3 = <input type={"text"} placeholder={"Wprowadź czas trwania"} onChange={e => { setDuration(e.target.value) }} />
     const input4 = <input type={"text"} placeholder={"Wprowadź obsadę"} onChange={e => { setCast(e.target.value) }} />
-
 
     const [errors, setErrors] = useState({})
     let fields = { title: title, description: description, duration: duration, cast: cast }
@@ -89,11 +87,11 @@ function AddFilm(props) {
             description: description,
             cast: cast
         }
+
         if (handleValidation()) {
             copy.push(filmik);
             axios.post("http://localhost:7777/movies", { movies: copy })
                 .then(res => { console.log(res) })
-            //setListaFilmow(copy);
             setFilms(copy)
         }
     }

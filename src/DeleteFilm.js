@@ -22,8 +22,6 @@ function DeleteFilm (props){
         deleteFilm(filtered)
     }
 
-    
-
     return (
         <div>               
           <button onClick={buttonClickDelete}>Usuń film</button>

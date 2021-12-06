@@ -188,7 +188,6 @@ AddScreening.propTypes = {
         room: PropTypes.shape({
             nr: PropTypes.string,
             capacity: PropTypes.number,
-            howManyTaken: PropTypes.number
         }).isRequired,
         soldTickets: PropTypes.number,
         availableTickets: PropTypes.number,
@@ -197,7 +196,6 @@ AddScreening.propTypes = {
     rooms: PropTypes.arrayOf(PropTypes.shape({
         nr: PropTypes.string,
         capacity: PropTypes.number,
-        howManyTaken: PropTypes.number
     })).isRequired,
     setScreenings: PropTypes.func.isRequired
 }

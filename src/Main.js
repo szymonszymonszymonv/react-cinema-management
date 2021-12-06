@@ -30,7 +30,11 @@ class Main extends Component {
         axios.get("http://localhost:7777/")
         .then(res => {
               data = res.data;
+              console.log(data)
               let {movies, screenings, rooms} = data
+              for(let room of rooms){
+                  room.nr = `${room.nr}`
+              }
               for(let screening of screenings){
                   let roomId = screening.room
                   let filmId = screening.film

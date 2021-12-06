@@ -50,7 +50,6 @@ Screenings.propTypes = {
         room: PropTypes.shape({
             nr: PropTypes.string,
             capacity: PropTypes.number,
-            howManyTaken: PropTypes.number
         }).isRequired,
         soldTickets: PropTypes.number,
         availableTickets: PropTypes.number,
