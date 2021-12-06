@@ -112,23 +112,23 @@ function Film(props) {
                 {"Obsada: "} {listaFilmow[idx].cast}{" "}
               </p>{" "}
             </div>
-        <input type="text" placeholder={listaFilmow[idx].title} onChange={onChange} />{" "}
+        <input type="text" value={listaFilmow[idx].title} onChange={onChange} />{" "}
         <button onClick={buttonClick}> Edytuj tytuł </button> <p> </p>{" "}
         <input
           type="text"
-          placeholder={listaFilmow[idx].description}
+          value={listaFilmow[idx].description}
           onChange={onChangenDescription}
         />{" "}
         <button onClick={buttonClickDescription}> Edytuj opis </button> <p> </p>{" "}
         <input
           type="text"
-          placeholder={listaFilmow[idx].duration}
+          value={listaFilmow[idx].duration}
           onChange={onChangeDuration}
         />{" "}
         <button onClick={buttonClickDuration}> Edytuj czas </button> <p> </p>{" "}
         <input
           type="text"
-          placeholder={listaFilmow[idx].cast}
+          value={listaFilmow[idx].cast}
           onChange={onChangenCast}
         />{" "}
         <button onClick={buttonClickCast}> Edytuj obsadę </button> <p> </p>{" "}
