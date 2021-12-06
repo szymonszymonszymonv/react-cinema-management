@@ -1,1 +1,34 @@
-{"screenings":[{"id":"2","film":"2","date":[2021,11,2],"time":"23:00","room":"3","soldTickets":0,"availableTickets":20,"takenSeats":[]},{"id":"3","film":"3","date":[2021,11,1],"time":"16:00","room":"1","soldTickets":0,"availableTickets":20,"takenSeats":[]},{"id":"5","film":"e0d271bc-ac71-42d3-9f5e-d4cf402bfad5","date":[2021,11,2],"time":"23:30","room":"2","soldTickets":0,"availableTickets":20,"takenSeats":[]},{"id":"4","film":"fb066351-4aa1-4476-8419-85cc36637236","date":[2021,11,2],"time":"09:28","room":"5","soldTickets":0,"availableTickets":20,"takenSeats":[]},{"id":"e219a080-f467-49d3-a973-d4d64686d2da","film":"2","date":"2021-12-14T23:00:00.000Z","time":"08:26","room":"3","soldTickets":0,"availableTickets":20,"takenSeats":[]}]}
+{
+  "screenings": [
+    {
+      "id": "3",
+      "film": "3",
+      "date": [2021, 11, 1],
+      "time": "16:00",
+      "room": "1",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "5",
+      "film": "e0d271bc-ac71-42d3-9f5e-d4cf402bfad5",
+      "date": [2021, 11, 2],
+      "time": "23:30",
+      "room": "2",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    },
+    {
+      "id": "4",
+      "film": "fb066351-4aa1-4476-8419-85cc36637236",
+      "date": [2021, 11, 2],
+      "time": "09:28",
+      "room": "5",
+      "soldTickets": 0,
+      "availableTickets": 20,
+      "takenSeats": []
+    }
+  ]
+}

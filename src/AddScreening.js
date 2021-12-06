@@ -129,7 +129,7 @@ function AddScreening(props) {
         let screeningJson = {
             id: randId,
             film: title.id,
-            date: new Date(...dateInts),
+            date: dateInts,
             time: time,
             room: room.nr,
             soldTickets: 0,
