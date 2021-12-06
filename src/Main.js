@@ -41,7 +41,7 @@ class Main extends Component {
                   let date = new Date(...screening.date)
                   screening.date = date
                   screening.room = rooms.find( (item) => {
-                      return item.nr === parseInt(roomId)
+                      return item.nr === (roomId)
                   })
                   screening.film = movies.find( (item) => {
                       return item.id === filmId
