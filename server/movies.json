@@ -41,6 +41,27 @@
             "duration": "155",
             "description": "Historia Patrizii Reggiani, byłej żony Maurizio Gucciego, która planowała zabić swojego męża, wnuka znanego projektanta mody Guccio Gucci.",
             "cast": "Lady Gaga, Jared Leto"
+        },
+        {
+            "id": "485fc3c4-87a5-4d89-8da8-f0ea5a1dd4cf",
+            "title": "Eternals",
+            "duration": "105",
+            "description": "Opowieść o Eternals - przedwiecznej rasie nieśmiertelnych istot, które zamieszkiwały Ziemię i ukształtowały jej historię.",
+            "cast": "Gemma Chan, Richard Madden, Angelina Jolie"
+        },
+        {
+            "id": "27d39465-e536-43f3-8397-a23ac24e3a15",
+            "title": "Sponsor",
+            "duration": "145",
+            "description": "Darren marzy o karierze muzycznej, ale jest spłukana. Aby zdobyć pieniądze dołącza do serwisu internetowego oferującego płatne randki.",
+            "cast": "Bengt C.W. Carlsson, Aleksandar Gajic, Emelia Hansson"
+        },
+        {
+            "id": "b2302134-2178-4d1a-a453-1a60216e9f31",
+            "title": "Psie Pazury",
+            "duration": "95",
+            "description": "Dwaj bracia, właściciele dużego rancza w Montanie, stają przeciwko sobie, gdy George żeni się potajemnie z miejscową wdową.",
+            "cast": "Benedict Cumberbatch"
         }
     ]
 }
