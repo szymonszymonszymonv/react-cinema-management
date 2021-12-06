@@ -120,10 +120,9 @@ function EditScreening(props) {
     const buttonClick = () => {
         let copy = [...screeningList]
 
-        copy[idx].film = film
+        copy[idx].film = title
         let dateInts = date.split("-").map((x) => { return parseInt(x) })
         dateInts[1] -= 1
-        copy[idx].title = title
         copy[idx].date = new Date(...dateInts)
         copy[idx].time = time
         copy[idx].room = room
