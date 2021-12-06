@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 function Film(props) {
+
     const params = useParams()
     let navigate = useNavigate()
     const idx = params.id
@@ -85,7 +86,6 @@ function Film(props) {
         setListaFilmow(films);
         setFilms(films)
     };
-
 
     // const deleteButtonClick = () => {
     //     deleteFilmm("")

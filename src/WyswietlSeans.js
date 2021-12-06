@@ -30,6 +30,7 @@ function WyswietlSeans(props) {
             wypisac.push(screenings[i])
         }
     }
+    
 
     function WypiszTablice() {
         let tablica = wypisac.map((item, idx) => {
