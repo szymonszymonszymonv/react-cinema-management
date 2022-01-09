@@ -27,7 +27,6 @@ function AddFilm(props) {
                 errors[key] = `${key} cannot be empty`
                 setErrors(errors)
                 return formIsValid
-
             }
             else if (value === title) {
                 if (typeof (value) != "string") {
@@ -35,7 +34,6 @@ function AddFilm(props) {
                     errors["title"] = `${key} is not a string`
                     setErrors(errors)
                     return formIsValid
-
                 }
 
                 if (value.charAt(0) == value.charAt(0).toLowerCase()){

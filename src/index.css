@@ -25,9 +25,9 @@ code {
   opacity: 90%;
   background-image: linear-gradient(
     to right,
-    #f07362 0%,
-    #e9a454 51%,
-    #e67447 100%
+    #e9a454 0%,
+    #e67447 51%,
+    #e9a454 100%
   );
   width: 100%;
   height: 100px;
@@ -36,9 +36,9 @@ code {
   opacity: 90%;
   background-image: linear-gradient(
     to right,
-    #f07362 0%,
-    #e9a454 51%,
-    #e67447 100%
+    #e9a454 0%,
+    #e67447 51%,
+    #e9a454 100%
   );
   color: rgb(254, 255, 254);
   height: 100%;

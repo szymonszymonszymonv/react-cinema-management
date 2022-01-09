@@ -163,6 +163,7 @@ function EditScreening(props) {
     )
 }
 
+
 EditScreening.propTypes = {
     setScreenings: PropTypes.func.isRequired,
     screenings: PropTypes.arrayOf(PropTypes.shape({
